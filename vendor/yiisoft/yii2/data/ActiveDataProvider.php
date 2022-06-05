@@ -7,10 +7,9 @@
 
 namespace yii\data;
 
-use Yii;
-use yii\db\ActiveQueryInterface;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
+use yii\db\ActiveQueryInterface;
 use yii\db\Connection;
 use yii\db\QueryInterface;
 use yii\di\Instance;
@@ -22,7 +21,7 @@ use yii\di\Instance;
  *
  * The following is an example of using ActiveDataProvider to provide ActiveRecord instances:
  *
- * ~~~
+ * ```php
  * $provider = new ActiveDataProvider([
  *     'query' => Post::find(),
  *     'pagination' => [
@@ -32,12 +31,12 @@ use yii\di\Instance;
  *
  * // get the posts in the current page
  * $posts = $provider->getModels();
- * ~~~
+ * ```
  *
  * And the following example shows how to use ActiveDataProvider without ActiveRecord:
  *
- * ~~~
- * $query = new Query;
+ * ```php
+ * $query = new Query();
  * $provider = new ActiveDataProvider([
  *     'query' => $query->from('post'),
  *     'pagination' => [
@@ -47,7 +46,9 @@ use yii\di\Instance;
  *
  * // get the posts in the current page
  * $posts = $provider->getModels();
- * ~~~
+ * ```
+ *
+ * For more details and usage information on ActiveDataProvider, see the [guide article on data providers](guide:output-data-providers).
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -55,12 +56,11 @@ use yii\di\Instance;
 class ActiveDataProvider extends BaseDataProvider
 {
     /**
-     * @var QueryInterface the query that is used to fetch data models and [[totalCount]]
-     * if it is not explicitly set.
+     * @var QueryInterface|null the query that is used to fetch data models and [[totalCount]] if it is not explicitly set.
      */
     public $query;
     /**
-     * @var string|callable the column that is used as the key of the data models.
+     * @var string|callable|null the column that is used as the key of the data models.
      * This can be either a column name, or a callable that returns the key value of a given data model.
      *
      * If this is not set, the following rules will be used to determine the keys of the data models:
@@ -72,8 +72,8 @@ class ActiveDataProvider extends BaseDataProvider
      */
     public $key;
     /**
-     * @var Connection|array|string the DB connection object or the application component ID of the DB connection.
-     * If not set, the default DB connection will be used.
+     * @var Connection|array|string|null the DB connection object or the application component ID of the DB connection.
+     * If set it overrides [[query]] default DB connection.
      * Starting from version 2.0.2, this can also be a configuration array for creating the object.
      */
     public $db;
@@ -81,19 +81,19 @@ class ActiveDataProvider extends BaseDataProvider
 
     /**
      * Initializes the DB connection component.
-     * This method will initialize the [[db]] property to make sure it refers to a valid DB connection.
+     * This method will initialize the [[db]] property (when set) to make sure it refers to a valid DB connection.
      * @throws InvalidConfigException if [[db]] is invalid.
      */
     public function init()
     {
         parent::init();
-        if (is_string($this->db)) {
-            $this->db = Instance::ensure($this->db, Connection::className());
+        if ($this->db !== null) {
+            $this->db = Instance::ensure($this->db);
         }
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function prepareModels()
     {
@@ -103,6 +103,9 @@ class ActiveDataProvider extends BaseDataProvider
         $query = clone $this->query;
         if (($pagination = $this->getPagination()) !== false) {
             $pagination->totalCount = $this->getTotalCount();
+            if ($pagination->totalCount === 0) {
+                return [];
+            }
             $query->limit($pagination->getLimit())->offset($pagination->getOffset());
         }
         if (($sort = $this->getSort()) !== false) {
@@ -113,7 +116,7 @@ class ActiveDataProvider extends BaseDataProvider
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function prepareKeys($models)
     {
@@ -129,7 +132,7 @@ class ActiveDataProvider extends BaseDataProvider
 
             return $keys;
         } elseif ($this->query instanceof ActiveQueryInterface) {
-            /* @var $class \yii\db\ActiveRecord */
+            /* @var $class \yii\db\ActiveRecordInterface */
             $class = $this->query->modelClass;
             $pks = $class::primaryKey();
             if (count($pks) === 1) {
@@ -148,13 +151,13 @@ class ActiveDataProvider extends BaseDataProvider
             }
 
             return $keys;
-        } else {
-            return array_keys($models);
         }
+
+        return array_keys($models);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function prepareTotalCount()
     {
@@ -166,21 +169,39 @@ class ActiveDataProvider extends BaseDataProvider
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setSort($value)
     {
         parent::setSort($value);
-        if (($sort = $this->getSort()) !== false && empty($sort->attributes) && $this->query instanceof ActiveQueryInterface) {
-            /* @var $model Model */
-            $model = new $this->query->modelClass;
-            foreach ($model->attributes() as $attribute) {
-                $sort->attributes[$attribute] = [
-                    'asc' => [$attribute => SORT_ASC],
-                    'desc' => [$attribute => SORT_DESC],
-                    'label' => $model->getAttributeLabel($attribute),
-                ];
+        if ($this->query instanceof ActiveQueryInterface && ($sort = $this->getSort()) !== false) {
+            /* @var $modelClass Model */
+            $modelClass = $this->query->modelClass;
+            $model = $modelClass::instance();
+            if (empty($sort->attributes)) {
+                foreach ($model->attributes() as $attribute) {
+                    $sort->attributes[$attribute] = [
+                        'asc' => [$attribute => SORT_ASC],
+                        'desc' => [$attribute => SORT_DESC],
+                        'label' => $model->getAttributeLabel($attribute),
+                    ];
+                }
+            } else {
+                foreach ($sort->attributes as $attribute => $config) {
+                    if (!isset($config['label'])) {
+                        $sort->attributes[$attribute]['label'] = $model->getAttributeLabel($attribute);
+                    }
+                }
             }
         }
+    }
+
+    public function __clone()
+    {
+        if (is_object($this->query)) {
+            $this->query = clone $this->query;
+        }
+
+        parent::__clone();
     }
 }

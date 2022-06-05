@@ -14,7 +14,7 @@
  * Classes implementing this interface may use a subsystem which requires less
  * memory than working with large strings of data.
  *
- * @author     Chris Corbyn
+ * @author Chris Corbyn
  */
 interface Swift_InputByteStream
 {
@@ -30,9 +30,9 @@ interface Swift_InputByteStream
      *
      * @param string $bytes
      *
-     * @return int
-     *
      * @throws Swift_IoException
+     *
+     * @return int
      */
     public function write($bytes);
 
@@ -52,7 +52,7 @@ interface Swift_InputByteStream
      *
      * @param Swift_InputByteStream $is
      */
-    public function bind(Swift_InputByteStream $is);
+    public function bind(self $is);
 
     /**
      * Remove an already bound stream.
@@ -63,7 +63,7 @@ interface Swift_InputByteStream
      *
      * @param Swift_InputByteStream $is
      */
-    public function unbind(Swift_InputByteStream $is);
+    public function unbind(self $is);
 
     /**
      * Flush the contents of the stream (empty it) and set the internal pointer

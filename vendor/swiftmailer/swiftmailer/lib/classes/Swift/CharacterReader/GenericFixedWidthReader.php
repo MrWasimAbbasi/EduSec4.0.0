@@ -21,37 +21,37 @@ class Swift_CharacterReader_GenericFixedWidthReader implements Swift_CharacterRe
      *
      * @var int
      */
-    private $_width;
+    private $width;
 
     /**
      * Creates a new GenericFixedWidthReader using $width bytes per character.
      *
-     * @param int     $width
+     * @param int $width
      */
     public function __construct($width)
     {
-        $this->_width = $width;
+        $this->width = $width;
     }
 
     /**
      * Returns the complete character map.
      *
-     * @param string  $string
-     * @param int     $startOffset
-     * @param array   $currentMap
-     * @param mixed   $ignoredChars
+     * @param string $string
+     * @param int    $startOffset
+     * @param array  $currentMap
+     * @param mixed  $ignoredChars
      *
      * @return int
      */
     public function getCharPositions($string, $startOffset, &$currentMap, &$ignoredChars)
     {
-        $strlen = strlen($string);
+        $strlen = \strlen($string);
         // % and / are CPU intensive, so, maybe find a better way
-        $ignored = $strlen % $this->_width;
-        $ignoredChars = substr($string, - $ignored);
-        $currentMap = $this->_width;
+        $ignored = $strlen % $this->width;
+        $ignoredChars = $ignored ? substr($string, -$ignored) : '';
+        $currentMap = $this->width;
 
-        return ($strlen - $ignored) / $this->_width;
+        return ($strlen - $ignored) / $this->width;
     }
 
     /**
@@ -73,16 +73,16 @@ class Swift_CharacterReader_GenericFixedWidthReader implements Swift_CharacterRe
      * A value of zero means this is already a valid character.
      * A value of -1 means this cannot possibly be a valid character.
      *
-     * @param string  $bytes
-     * @param int     $size
+     * @param string $bytes
+     * @param int    $size
      *
      * @return int
      */
     public function validateByteSequence($bytes, $size)
     {
-        $needed = $this->_width - $size;
+        $needed = $this->width - $size;
 
-        return ($needed > -1) ? $needed : -1;
+        return $needed > -1 ? $needed : -1;
     }
 
     /**
@@ -92,6 +92,6 @@ class Swift_CharacterReader_GenericFixedWidthReader implements Swift_CharacterRe
      */
     public function getInitialByteSize()
     {
-        return $this->_width;
+        return $this->width;
     }
 }

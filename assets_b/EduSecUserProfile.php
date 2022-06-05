@@ -11,7 +11,7 @@ use yii\web\AssetBundle;
 class EduSecUserProfile extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $sourcePath = '@bower/admin-lte';
+    public $baseUrl = '@web';
     public $css = [
 		'css/EduSecUserProfile.css',
     ];

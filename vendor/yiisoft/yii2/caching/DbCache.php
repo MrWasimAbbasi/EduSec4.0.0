@@ -10,6 +10,7 @@ namespace yii\caching;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\Connection;
+use yii\db\PdoValue;
 use yii\db\Query;
 use yii\di\Instance;
 
@@ -31,6 +32,8 @@ use yii\di\Instance;
  * ]
  * ```
  *
+ * For more details and usage information on Cache, see the [guide article on caching](guide:caching-overview).
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
@@ -47,31 +50,41 @@ class DbCache extends Cache
      * @var string name of the DB table to store cache content.
      * The table should be pre-created as follows:
      *
-     * ~~~
+     * ```php
      * CREATE TABLE cache (
      *     id char(128) NOT NULL PRIMARY KEY,
      *     expire int(11),
      *     data BLOB
      * );
-     * ~~~
+     * ```
+     *
+     * For MSSQL:
+     * ```php
+     * CREATE TABLE cache (
+     *     id VARCHAR(128) NOT NULL PRIMARY KEY,
+     *     expire INT(11),
+     *     data VARBINARY(MAX)
+     * );
+     * ```
      *
      * where 'BLOB' refers to the BLOB-type of your preferred DBMS. Below are the BLOB type
      * that can be used for some popular DBMS:
      *
      * - MySQL: LONGBLOB
      * - PostgreSQL: BYTEA
-     * - MSSQL: BLOB
      *
      * When using DbCache in a production server, we recommend you create a DB index for the 'expire'
      * column in the cache table to improve the performance.
      */
     public $cacheTable = '{{%cache}}';
     /**
-     * @var integer the probability (parts per million) that garbage collection (GC) should be performed
+     * @var int the probability (parts per million) that garbage collection (GC) should be performed
      * when storing a piece of data in the cache. Defaults to 100, meaning 0.01% chance.
      * This number should be between 0 and 1000000. A value 0 meaning no GC will be performed at all.
      */
     public $gcProbability = 100;
+
+    protected $isVarbinaryDataField;
 
 
     /**
@@ -93,13 +106,13 @@ class DbCache extends Cache
      * may return false while exists returns true.
      * @param mixed $key a key identifying the cached value. This can be a simple string or
      * a complex data structure consisting of factors representing the key.
-     * @return boolean true if a value exists in cache, false if the value is not in the cache or expired.
+     * @return bool true if a value exists in cache, false if the value is not in the cache or expired.
      */
     public function exists($key)
     {
         $key = $this->buildKey($key);
 
-        $query = new Query;
+        $query = new Query();
         $query->select(['COUNT(*)'])
             ->from($this->cacheTable)
             ->where('[[id]] = :id AND ([[expire]] = 0 OR [[expire]] >' . time() . ')', [':id' => $key]);
@@ -119,12 +132,12 @@ class DbCache extends Cache
      * Retrieves a value from cache with a specified key.
      * This is the implementation of the method declared in the parent class.
      * @param string $key a unique key identifying the cached value
-     * @return string|boolean the value stored in cache, false if the value is not in the cache or expired.
+     * @return string|false the value stored in cache, false if the value is not in the cache or expired.
      */
     protected function getValue($key)
     {
-        $query = new Query;
-        $query->select(['data'])
+        $query = new Query();
+        $query->select([$this->getDataFieldName()])
             ->from($this->cacheTable)
             ->where('[[id]] = :id AND ([[expire]] = 0 OR [[expire]] >' . time() . ')', [':id' => $key]);
         if ($this->db->enableQueryCache) {
@@ -134,9 +147,9 @@ class DbCache extends Cache
             $this->db->enableQueryCache = true;
 
             return $result;
-        } else {
-            return $query->createCommand($this->db)->queryScalar();
         }
+
+        return $query->createCommand($this->db)->queryScalar();
     }
 
     /**
@@ -149,8 +162,8 @@ class DbCache extends Cache
         if (empty($keys)) {
             return [];
         }
-        $query = new Query;
-        $query->select(['id', 'data'])
+        $query = new Query();
+        $query->select(['id', $this->getDataFieldName()])
             ->from($this->cacheTable)
             ->where(['id' => $keys])
             ->andWhere('([[expire]] = 0 OR [[expire]] > ' . time() . ')');
@@ -168,7 +181,11 @@ class DbCache extends Cache
             $results[$key] = false;
         }
         foreach ($rows as $row) {
-            $results[$row['id']] = $row['data'];
+            if (is_resource($row['data']) && get_resource_type($row['data']) === 'stream') {
+                $results[$row['id']] = stream_get_contents($row['data']);
+            } else {
+                $results[$row['id']] = $row['data'];
+            }
         }
 
         return $results;
@@ -179,24 +196,28 @@ class DbCache extends Cache
      * This is the implementation of the method declared in the parent class.
      *
      * @param string $key the key identifying the value to be cached
-     * @param string $value the value to be cached
-     * @param integer $duration the number of seconds in which the cached value will expire. 0 means never expire.
-     * @return boolean true if the value is successfully stored into cache, false otherwise
+     * @param string $value the value to be cached. Other types (if you have disabled [[serializer]]) cannot be saved.
+     * @param int $duration the number of seconds in which the cached value will expire. 0 means never expire.
+     * @return bool true if the value is successfully stored into cache, false otherwise
      */
     protected function setValue($key, $value, $duration)
     {
-        $command = $this->db->createCommand()
-            ->update($this->cacheTable, [
-                'expire' => $duration > 0 ? $duration + time() : 0,
-                'data' => [$value, \PDO::PARAM_LOB],
-            ], ['id' => $key]);
+        try {
+            $this->db->noCache(function (Connection $db) use ($key, $value, $duration) {
+                $db->createCommand()->upsert($this->cacheTable, [
+                    'id' => $key,
+                    'expire' => $duration > 0 ? $duration + time() : 0,
+                    'data' => $this->getDataFieldValue($value),
+                ])->execute();
+            });
 
-        if ($command->execute()) {
             $this->gc();
 
             return true;
-        } else {
-            return $this->addValue($key, $value, $duration);
+        } catch (\Exception $e) {
+            Yii::warning("Unable to update or insert cache data: {$e->getMessage()}", __METHOD__);
+
+            return false;
         }
     }
 
@@ -205,24 +226,28 @@ class DbCache extends Cache
      * This is the implementation of the method declared in the parent class.
      *
      * @param string $key the key identifying the value to be cached
-     * @param string $value the value to be cached
-     * @param integer $duration the number of seconds in which the cached value will expire. 0 means never expire.
-     * @return boolean true if the value is successfully stored into cache, false otherwise
+     * @param string $value the value to be cached. Other types (if you have disabled [[serializer]]) cannot be saved.
+     * @param int $duration the number of seconds in which the cached value will expire. 0 means never expire.
+     * @return bool true if the value is successfully stored into cache, false otherwise
      */
     protected function addValue($key, $value, $duration)
     {
         $this->gc();
 
         try {
-            $this->db->createCommand()
-                ->insert($this->cacheTable, [
-                    'id' => $key,
-                    'expire' => $duration > 0 ? $duration + time() : 0,
-                    'data' => [$value, \PDO::PARAM_LOB],
-                ])->execute();
+            $this->db->noCache(function (Connection $db) use ($key, $value, $duration) {
+                $db->createCommand()
+                    ->insert($this->cacheTable, [
+                        'id' => $key,
+                        'expire' => $duration > 0 ? $duration + time() : 0,
+                        'data' => $this->getDataFieldValue($value),
+                    ])->execute();
+            });
 
             return true;
         } catch (\Exception $e) {
+            Yii::warning("Unable to insert cache data: {$e->getMessage()}", __METHOD__);
+
             return false;
         }
     }
@@ -231,25 +256,28 @@ class DbCache extends Cache
      * Deletes a value with the specified key from cache
      * This is the implementation of the method declared in the parent class.
      * @param string $key the key of the value to be deleted
-     * @return boolean if no error happens during deletion
+     * @return bool if no error happens during deletion
      */
     protected function deleteValue($key)
     {
-        $this->db->createCommand()
-            ->delete($this->cacheTable, ['id' => $key])
-            ->execute();
+        $this->db->noCache(function (Connection $db) use ($key) {
+            $db->createCommand()
+                ->delete($this->cacheTable, ['id' => $key])
+                ->execute();
+        });
 
         return true;
     }
 
     /**
      * Removes the expired data values.
-     * @param boolean $force whether to enforce the garbage collection regardless of [[gcProbability]].
+     * @param bool $force whether to enforce the garbage collection regardless of [[gcProbability]].
      * Defaults to false, meaning the actual deletion happens with the probability as specified by [[gcProbability]].
      */
     public function gc($force = false)
     {
-        if ($force || mt_rand(0, 1000000) < $this->gcProbability) {
+
+        if ($force || random_int(0, 1000000) < $this->gcProbability) {
             $this->db->createCommand()
                 ->delete($this->cacheTable, '[[expire]] > 0 AND [[expire]] < ' . time())
                 ->execute();
@@ -259,7 +287,7 @@ class DbCache extends Cache
     /**
      * Deletes all values from cache.
      * This is the implementation of the method declared in the parent class.
-     * @return boolean whether the flush operation was successful.
+     * @return bool whether the flush operation was successful.
      */
     protected function flushValues()
     {
@@ -268,5 +296,36 @@ class DbCache extends Cache
             ->execute();
 
         return true;
+    }
+
+    /**
+     * @return bool whether field is MSSQL varbinary
+     * @since 2.0.42
+     */
+    protected function isVarbinaryDataField()
+    {
+        if ($this->isVarbinaryDataField === null) {
+            $this->isVarbinaryDataField = in_array($this->db->getDriverName(), ['sqlsrv', 'dblib']) &&
+                $this->db->getTableSchema($this->cacheTable)->columns['data']->dbType === 'varbinary';
+        }
+        return $this->isVarbinaryDataField;
+    }
+
+    /**
+     * @return string `data` field name converted for usage in MSSQL (if needed)
+     * @since 2.0.42
+     */
+    protected function getDataFieldName()
+    {
+        return $this->isVarbinaryDataField() ? 'convert(nvarchar(max),[data]) data' : 'data';
+    }
+
+    /**
+     * @return PdoValue PdoValue or direct $value for usage in MSSQL
+     * @since 2.0.42
+     */
+    protected function getDataFieldValue($value)
+    {
+        return $this->isVarbinaryDataField() ? $value : new PdoValue($value, \PDO::PARAM_LOB);
     }
 }

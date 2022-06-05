@@ -5,11 +5,11 @@
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?labels=ext%3Ajui",
+        "issues": "https://github.com/yiisoft/yii2-jui/issues",
         "forum": "http://www.yiiframework.com/forum/",
         "wiki": "http://www.yiiframework.com/wiki/",
         "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "source": "https://github.com/yiisoft/yii2-jui"
     },
     "authors": [
         {
@@ -18,9 +18,15 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
-        "bower-asset/jquery-ui": "1.11.*@stable"
+        "yiisoft/yii2": "~2.0.4",
+        "bower-asset/jquery-ui": "~1.12.1"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "yii\\jui\\": ""

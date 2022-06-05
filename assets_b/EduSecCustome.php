@@ -42,20 +42,19 @@ class AppAsset extends AssetBundle
 class EduSecCustome extends AssetBundle
 {
     public $basePath = '@webroot';
-    //public $baseUrl = '@web';
-    public $sourcePath = '@bower/admin-lte';
+    public $baseUrl = '@web';
     public $css = [
-		//'css/AdminLTE.css',
+        //'css/AdminLTE.css',
     ];
     public $js = [
-		'js/responsive-tabs.js',
+        'js/responsive-tabs.js',
     ];
     public $jsOptions = [
-    		'position' => \yii\web\View::POS_HEAD
+        'position' => \yii\web\View::POS_HEAD
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-	'yii\bootstrap\BootstrapPluginAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

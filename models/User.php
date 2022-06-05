@@ -3,34 +3,29 @@
 /*****************************************************************************************
  * EduSec  Open Source Edition is a School / College management system developed by
  * RUDRA SOFTECH. Copyright (C) 2010-2015 RUDRA SOFTECH.
-
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
-
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
-
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses. 
-
- * You can contact RUDRA SOFTECH, 1st floor Geeta Ceramics, 
+ * along with this program.  If not, see http://www.gnu.org/licenses.
+ * You can contact RUDRA SOFTECH, 1st floor Geeta Ceramics,
  * Opp. Thakkarnagar BRTS station, Ahmedbad - 382350, India or
  * at email address info@rudrasoftech.com.
- * 
+ *
  * The interactive user interfaces in modified source and object code versions
  * of this program must display Appropriate Legal Notices, as required under
  * Section 5 of the GNU Affero General Public License version 3.
- 
  * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
  * these Appropriate Legal Notices must retain the display of the "Powered by
  * RUDRA SOFTECH" logo. If the display of the logo is not reasonably feasible for
  * technical reasons, the Appropriate Legal Notices must display the words
  * "Powered by RUDRA SOFTECH".
-*****************************************************************************************/
+ *****************************************************************************************/
 
 /**
  * This is the model class for table "users".
@@ -97,8 +92,9 @@ use app\modules\student\models\StuMaster;
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
-    public $current_pass,$new_pass,$retype_pass;
-    public $create_password, $confirm_password, $admin_user;	
+    public $current_pass, $new_pass, $retype_pass;
+    public $create_password, $confirm_password, $admin_user;
+    public $authKey = null;
 
     /**
      * @inheritdoc
@@ -116,17 +112,17 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             [['user_login_id', 'user_password', 'user_type', 'created_at', 'created_by'], 'required'],
             [['is_block', 'created_by', 'updated_by'], 'integer'],
-	    [['current_pass', 'new_pass', 'retype_pass'], 'required','on'=>'change','message'=>''],
-	    ['current_pass','checkOldPassword','on'=>'change','message'=>''],
-	    ['retype_pass', 'compare','compareAttribute'=>'new_pass'],
+            [['current_pass', 'new_pass', 'retype_pass'], 'required', 'on' => 'change', 'message' => ''],
+            ['current_pass', 'checkOldPassword', 'on' => 'change', 'message' => ''],
+            ['retype_pass', 'compare', 'compareAttribute' => 'new_pass'],
             [['created_at', 'updated_at'], 'safe'],
             [['user_login_id'], 'string', 'max' => 65],
             [['user_password'], 'string', 'max' => 150],
             [['user_type'], 'string', 'max' => 2],
             [['user_login_id'], 'unique'],
 
-	    ['confirm_password', 'compare','compareAttribute'=>'create_password', 'on'=>'firstTime'],
-	    [['create_password', 'confirm_password', 'admin_user'], 'required', 'on'=>'firstTime'],
+            ['confirm_password', 'compare', 'compareAttribute' => 'create_password', 'on' => 'firstTime'],
+            [['create_password', 'confirm_password', 'admin_user'], 'required', 'on' => 'firstTime'],
         ];
     }
 
@@ -141,16 +137,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'user_password' => 'Password',
             'user_type' => 'User Type',
             'is_block' => 'Is Block',
-	    'current_pass' => 'Current Password',
-	    'new_pass' => 'New Password',
-	    'retype_pass' => 'Retype Password',
+            'current_pass' => 'Current Password',
+            'new_pass' => 'New Password',
+            'retype_pass' => 'Retype Password',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
-	    'admin_user' => 'Admin Username',
-	    'create_password' => 'Admin Password',
-	    'confirm_password' => 'Confirm Password',
+            'admin_user' => 'Admin Username',
+            'create_password' => 'Admin Password',
+            'confirm_password' => 'Confirm Password',
         ];
     }
 
@@ -167,25 +163,25 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-	return static::findOne(['access_token' => $token]);
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
      * Finds user by username
      *
-     * @param  string      $username
+     * @param  string $username
      * @return static|null
      */
 
     public static function findByUsername($username)
     {
-	return static::findOne(['user_login_id' => $username]);
+        return static::findOne(['user_login_id' => $username]);
     }
 
     /**
      * Finds user by password reset token
      *
-     * @param  string      $token password reset token
+     * @param  string $token password reset token
      * @return static|null
      */
 
@@ -193,7 +189,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $expire = \Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
+        $timestamp = (int)end($parts);
         if ($timestamp + $expire < time()) {
             // token expired
             return null;
@@ -211,12 +207,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->getPrimaryKey();
 
     }
-   
+
     /**
      * @inheritdoc
      */
     public function getAuthKey()
     {
+
         return $this->authKey;
     }
 
@@ -228,15 +225,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->authKey === $authKey;
     }
 
-     /**
+    /**
      * Validates password
      *
-     * @param  string  $password password to validate
+     * @param  string $password password to validate
      * @return boolean if password provided is valid for current user
      */
     public function validatePassword($password)
     {
-        return $this->user_password === md5($password.$password);
+        return $this->user_password === md5($password . $password);
     }
 
     // Generates "remember me" authentication key
@@ -531,27 +528,28 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function getAuthuser()
     {
-    	return $this->hasOne(AuthAssignment::className(), ['user_id' => 'user_id']);
+        return $this->hasOne(AuthAssignment::className(), ['user_id' => 'user_id']);
     }
 
     public function getEmpMaster()
     {
         return $this->hasOne(EmpMaster::className(), ['emp_master_user_id' => 'user_id']);
     }
- 
+
     public function getStuMaster()
     {
         return $this->hasOne(StuMaster::className(), ['stu_master_user_id' => 'user_id']);
     }
+
     /**
      *  @ check old password is correct or wrong.
      */
-    public function checkOldPassword($attribute,$params)
+    public function checkOldPassword($attribute, $params)
     {
-	$record = User::find()->where(['user_password'=>md5($this->current_pass.$this->current_pass)])->one();
+        $record = User::find()->where(['user_password' => md5($this->current_pass . $this->current_pass)])->one();
 
-	if($record === null) {
-		$this->addError($attribute, 'Invalid or Wrong password');
-	}
+        if ($record === null) {
+            $this->addError($attribute, 'Invalid or Wrong password');
+        }
     }
 }

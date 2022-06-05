@@ -30,22 +30,22 @@ use yii\base\UserException;
 class HttpException extends UserException
 {
     /**
-     * @var integer HTTP status code, such as 403, 404, 500, etc.
+     * @var int HTTP status code, such as 403, 404, 500, etc.
      */
     public $statusCode;
 
 
     /**
      * Constructor.
-     * @param integer $status HTTP status code, such as 404, 500, etc.
+     * @param int $status HTTP status code, such as 404, 500, etc.
      * @param string $message error message
-     * @param integer $code error code
-     * @param \Exception $previous The previous exception used for the exception chaining.
+     * @param int $code error code
+     * @param \Throwable|null $previous The previous exception used for the exception chaining.
      */
-    public function __construct($status, $message = null, $code = 0, \Exception $previous = null)
+    public function __construct($status, $message = null, $code = 0, $previous = null)
     {
         $this->statusCode = $status;
-        parent::__construct($message, $code, $previous);
+        parent::__construct((string)$message, $code, $previous);
     }
 
     /**
@@ -55,8 +55,8 @@ class HttpException extends UserException
     {
         if (isset(Response::$httpStatuses[$this->statusCode])) {
             return Response::$httpStatuses[$this->statusCode];
-        } else {
-            return 'Error';
         }
+
+        return 'Error';
     }
 }

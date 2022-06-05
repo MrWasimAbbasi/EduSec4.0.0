@@ -16,7 +16,7 @@ use yii\helpers\Json;
 /**
  * DatePicker renders a `datepicker` jQuery UI widget.
  *
- * For example to use the datepicker with a [[yii\base\Model|model]]:
+ * For example to use the datepicker with a [[\yii\base\Model|model]]:
  *
  * ```php
  * echo DatePicker::widget([
@@ -38,7 +38,7 @@ use yii\helpers\Json;
  * ]);
  * ```
  *
- * You can also use this widget in an [[yii\widgets\ActiveForm|ActiveForm]] using the [[yii\widgets\ActiveField::widget()|widget()]]
+ * You can also use this widget in an [[\yii\widgets\ActiveForm|ActiveForm]] using the [[\yii\widgets\ActiveField::widget()|widget()]]
  * method, for example like this:
  *
  * ```php
@@ -139,25 +139,18 @@ class DatePicker extends InputWidget
         $language = $this->language ? $this->language : Yii::$app->language;
 
         if (strncmp($this->dateFormat, 'php:', 4) === 0) {
-            $this->clientOptions['dateFormat'] = FormatConverter::convertDatePhpToJui(substr($this->dateFormat, 4), 'date', $language);
+            $this->clientOptions['dateFormat'] = FormatConverter::convertDatePhpToJui(substr($this->dateFormat, 4));
         } else {
             $this->clientOptions['dateFormat'] = FormatConverter::convertDateIcuToJui($this->dateFormat, 'date', $language);
         }
 
-        if ($language != 'en-US') {
+        if ($language !== 'en-US') {
             $view = $this->getView();
-            $bundle = DatePickerLanguageAsset::register($view);
-            if ($bundle->autoGenerate) {
-                $fallbackLanguage = substr($language, 0, 2);
-                if ($fallbackLanguage !== $language && !file_exists(Yii::getAlias($bundle->sourcePath . "/ui/i18n/datepicker-$language.js"))) {
-                    $language = $fallbackLanguage;
-                }
-                $view->registerJsFile($bundle->baseUrl . "/ui/i18n/datepicker-$language.js", [
-                    'depends' => [JuiAsset::className()],
-                ]);
-            }
-            $options = Json::encode($this->clientOptions);
-            $view->registerJs("$('#{$containerID}').datepicker($.extend({}, $.datepicker.regional['{$language}'], $options));");
+            $assetBundle = DatePickerLanguageAsset::register($view);
+            $assetBundle->language = $language;
+            $options = Json::htmlEncode($this->clientOptions);
+            $language = Html::encode($language);
+            $view->registerJs("jQuery('#{$containerID}').datepicker($.extend({}, $.datepicker.regional['{$language}'], $options));");
         } else {
             $this->registerClientOptions('datepicker', $containerID);
         }

@@ -1,29 +1,52 @@
-yii2-widget-activeform
-======================
-Extends and enhances the [Yii ActiveForm widget](https://github.com/yiisoft/yii2/blob/master/framework/widgets/ActiveForm.php). Facilitates all [three form layouts](http://getbootstrap.com/css/#forms-example) available in Bootstrap i.e. __vertical__, __horizontal__, and __inline__. Allows options for offsetting labels and inputs for horizontal form layout. Works closely with the extended ActiveField widget. In addition, this extension enhances and extends the [Yii ActiveField widget](https://github.com/yiisoft/yii2/blob/master/framework/widgets/ActiveField.php). Allows Bootstrap styled [input group addons](http://getbootstrap.com/components/#input-groups-basic) to be prepended or appended to textInputs. Automatically adjusts checkboxes and radio input offsets for horizontal forms. Allows, flexibility to control the labels and placeholders based on form layout style (e.g. hide labels and show them as placeholder for inline forms). The extended ActiveField functionalities available are:
+<h1 align="center">
+    <a href="http://demos.krajee.com" title="Krajee Demos" target="_blank">
+        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/krajee-logo-b.png" alt="Krajee Logo"/>
+    </a>
+    <br>
+    yii2-widget-activeform
+    <hr>
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DTP3NZQ6G2AYU"
+       title="Donate via Paypal" target="_blank"><img height="60" src="https://kartik-v.github.io/bootstrap-fileinput-samples/samples/donate.png" alt="Donate"/></a>
+    &nbsp; &nbsp; &nbsp;
+    <a href="https://www.buymeacoffee.com/kartikv" title="Buy me a coffee" ><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="60" alt="kartikv" /></a>
+</h1>
+
+[![Stable Version](https://poser.pugx.org/kartik-v/yii2-widget-activeform/v/stable)](https://packagist.org/packages/kartik-v/yii2-widget-activeform)
+[![Unstable Version](https://poser.pugx.org/kartik-v/yii2-widget-activeform/v/unstable)](https://packagist.org/packages/kartik-v/yii2-widget-activeform)
+[![License](https://poser.pugx.org/kartik-v/yii2-widget-activeform/license)](https://packagist.org/packages/kartik-v/yii2-widget-activeform)
+[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-widget-activeform/downloads)](https://packagist.org/packages/kartik-v/yii2-widget-activeform)
+[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-widget-activeform/d/monthly)](https://packagist.org/packages/kartik-v/yii2-widget-activeform)
+[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-widget-activeform/d/daily)](https://packagist.org/packages/kartik-v/yii2-widget-activeform)
+
+Extends and enhances the [Yii ActiveForm widget](https://github.com/yiisoft/yii2/blob/master/framework/widgets/ActiveForm.php). Facilitates all [three form layouts](http://getbootstrap.com/css/#forms-example) available in Bootstrap i.e. __vertical__, __horizontal__, and __inline__. Allows options for offsetting labels and inputs for horizontal form layout. Works closely with the extended ActiveField component. In addition, this extension enhances and extends the [Yii ActiveField component](https://github.com/yiisoft/yii2/blob/master/framework/widgets/ActiveField.php). Allows Bootstrap styled [input group addons](http://getbootstrap.com/components/#input-groups-basic) to be prepended or appended to textInputs. Implements [feedback icons](http://getbootstrap.com/css/#with-optional-icons) within inputs based on contextual states. Automatically adjusts checkboxes and radio input offsets for horizontal forms. Allows, flexibility to control the labels and placeholders based on form layout style (e.g. hide labels and show them as placeholder for inline forms). The extended ActiveField functionalities available are:
 
 - Addons
-	* Prepend Addon
-	* Append Addon
-	* Icon Addon
-	* Input Addon
-	* Button Addon
-	* Button Dropdown Addon
-	* Segmented Button Addon
-	* Prepend & Append
-	* Input Group Settings
+    * Prepend Addon
+    * Append Addon
+    * Icon Addon
+    * Input Addon
+    * Button Addon
+    * Button Dropdown Addon
+    * Segmented Button Addon
+    * Prepend & Append
+    * Input Group Settings
+    * Multiple Addons Configuration (_new_ since v1.4.9)
+- Input Feedback Icons
+- Input Hints Management
 - Inputs
-	* Checkbox
-	* Radio
-	* Checkbox List
-	* Radio List
-	* Static Input
-	* HTML 5 Input
+    * Checkbox
+    * Radio
+    * Checkbox List
+    * Radio List
+    * Static Input
+    * HTML 5 Input
+    * Checkbox Button Group
+    * Radio Button Group  
 - Multi Select
-	* Vertical Form
-	* Horizontal Form
-	* Radio List
-	* Display Options
+    * Vertical Form
+    * Horizontal Form
+    * Radio List
+    * Display Options
     
 > NOTE: This extension is a sub repo split of [yii2-widgets](https://github.com/kartik-v/yii2-widgets). The split has been done since 08-Nov-2014 to allow developers to install this specific widget in isolation if needed. One can also use the extension the previous way with the whole suite of [yii2-widgets](http://demos.krajee.com/widgets).
 
@@ -34,20 +57,20 @@ The preferred way to install this extension is through [composer](http://getcomp
 To install, either run
 
 ```
-$ php composer.phar require kartik-v/yii2-widget-activeform "*"
+$ php composer.phar require kartik-v/yii2-widget-activeform "@dev"
 ```
 
 or add
 
 ```
-"kartik-v/yii2-widget-activeform": "*"
+"kartik-v/yii2-widget-activeform": "@dev"
 ```
 
 to the ```require``` section of your `composer.json` file.
 
-## Latest Release
+## Release Changes
 
-> NOTE: The latest version of the module is v1.4.1. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-widget-activeform/blob/master/CHANGE.md) for details.
+> NOTE: Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-widget-activeform/blob/master/CHANGE.md) for details on changes to various releases.
 
 ## Demo
 
@@ -88,6 +111,16 @@ $form = ActiveForm::begin([
 
 ### ActiveField
 ```php
+// Implement a feedback icon
+echo $form->field($model, 'email_2', [
+    'feedbackIcon' => [
+        'default' => 'envelope',
+        'success' => 'ok',
+        'error' => 'exclamation-sign',
+        'defaultOptions' => ['class'=>'text-primary']
+    ]
+])->textInput(['placeholder'=>'Enter a valid email address...']);
+
 // Prepend an addon text
 echo $form->field($model, 'email', ['addon' => ['prepend' => ['content'=>'@']]]);
 
@@ -100,7 +133,7 @@ echo $form->field($model, 'amount_paid', [
 echo $form->field($model, 'phone', [
     'addon' => [
         'prepend' => [
-            'content' => '<i class="glyphicon glyphicon-phone"></i>'
+            'content' => '<i class="fas fa-phone"></i>'
         ]
     ]
 ]);
@@ -127,4 +160,4 @@ echo $form->field($model, 'phone', [
 
 ## License
 
-**yii2-widget-activeform** is released under the BSD 3-Clause License. See the bundled `LICENSE.md` for details.
+**yii2-widget-activeform** is released under the BSD-3-Clause License. See the bundled `LICENSE.md` for details.

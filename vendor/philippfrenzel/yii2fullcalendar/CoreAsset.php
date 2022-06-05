@@ -16,7 +16,7 @@ class CoreAsset extends AssetBundle
      * [$sourcePath description]
      * @var string
      */
-    public $sourcePath = '@bower/fullcalendar';
+    public $sourcePath = '@bower/fullcalendar/dist';
 
     /**
      * the language the calender will be displayed in
@@ -29,13 +29,19 @@ class CoreAsset extends AssetBundle
      * @var boolean
      */
     public $autoGenerate = true;
+
+    /**
+     * tell the calendar, if you like to render google calendar events within the view
+     * @var boolean
+     */
+    public $googleCalendar = false;
     
     /**
      * [$css description]
      * @var array
      */
     public $css = [
-        'fullcalendar.css',
+        'fullcalendar.min.css',
     ];
 
     /**
@@ -43,9 +49,8 @@ class CoreAsset extends AssetBundle
      * @var array
      */
     public $js = [
-        'fullcalendar.js',
-        'gcal.js',
-        'lang-all.js',
+        'fullcalendar.js',        
+        'locale-all.js',
     ];
     
     /**
@@ -53,9 +58,9 @@ class CoreAsset extends AssetBundle
      * @var array
      */
     public $depends = [
+        'yii\web\YiiAsset',
         'yii2fullcalendar\MomentAsset',
-        'yii2fullcalendar\PrintAsset',
-        'yii\jui\JuiAsset'
+        'yii2fullcalendar\PrintAsset'
     ];
 
     /**
@@ -63,14 +68,17 @@ class CoreAsset extends AssetBundle
      */
     public function registerAssetFiles($view)
     {
-        /* $language = $this->language ? $this->language : Yii::$app->language;
-         $this->js[] = "lang/{$language}.js";
-	*/
-	$language = strtolower($this->language ? $this->language : Yii::$app->language);
-         
-         if ($language != 'en-us') {
-             $this->js[] = "lang/{$language}.js";
-         }
+        $language = $this->language ? $this->language : Yii::$app->language;
+        if (strtoupper($language) != 'EN-US') 
+        {
+            $this->js[] = "locale/{$language}.js";
+        }
+
+        if($this->googleCalendar)
+        {
+            $this->js[] = 'gcal.js';
+        }
+
         parent::registerAssetFiles($view);
     }
 

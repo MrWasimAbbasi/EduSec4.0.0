@@ -7,6 +7,7 @@
 
 namespace yii\jui;
 
+use Yii;
 use yii\web\AssetBundle;
 
 /**
@@ -23,9 +24,30 @@ class DatePickerLanguageAsset extends AssetBundle
      */
     public $autoGenerate = true;
     /**
+     * @var string language to register translation file for
+     */
+    public $language;
+    /**
      * @inheritdoc
      */
     public $depends = [
         'yii\jui\JuiAsset',
     ];
+
+
+    /**
+     * @inheritdoc
+     */
+    public function registerAssetFiles($view)
+    {
+        if ($this->autoGenerate) {
+            $language = $this->language;
+            $fallbackLanguage = substr($this->language, 0, 2);
+            if ($fallbackLanguage !== $this->language && !file_exists(Yii::getAlias($this->sourcePath . "/ui/i18n/datepicker-{$language}.js"))) {
+                $language = $fallbackLanguage;
+            }
+            $this->js[] = "ui/i18n/datepicker-$language.js";
+        }
+        parent::registerAssetFiles($view);
+    }
 }

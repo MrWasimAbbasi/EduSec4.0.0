@@ -86,6 +86,7 @@ $config = [
 			'class' => 'yii\i18n\Formatter',
 		],
         	'db' => require(__DIR__ . '/db.php'),
+
     ],
 	
 	'as access' => [

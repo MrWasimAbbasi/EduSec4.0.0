@@ -1,71 +1,63 @@
 <?php
 
+use mdm\admin\AnimateAsset;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\web\YiiAsset;
 
 /* @var $this yii\web\View */
-/* @var $model yii\web\IdentityInterface */
+/* @var $model mdm\admin\models\Assignment */
+/* @var $fullnameField string */
 
-$this->title = Yii::t('rbac-admin', 'Assignments');
-$this->params['breadcrumbs'][] = $this->title;
+$userName = $model->{$usernameField};
+if (!empty($fullnameField)) {
+    $userName .= ' (' . ArrayHelper::getValue($model, $fullnameField) . ')';
+}
+$userName = Html::encode($userName);
 
+$this->title = Yii::t('rbac-admin', 'Assignment') . ' : ' . $userName;
+
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Assignments'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $userName;
+
+AnimateAsset::register($this);
+YiiAsset::register($this);
+$opts = Json::htmlEncode([
+    'items' => $model->getItems(),
+]);
+$this->registerJs("var _opts = {$opts};");
+$this->registerJs($this->render('_script.js'));
+$animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>';
 ?>
-<div class="col-xs-12">
-  <div class="col-lg-4 col-sm-4 col-xs-8 no-padding"><h3 class="box-title"><i class="fa fa-search"></i> <?= Html::encode($this->title) ?></h3></div>
-  <div class="col-lg-1 col-sm-2 col-xs-4 pull-right no-padding" style="padding-top: 20px !important;">
-	<?= Html::a('Back', ['index'], ['class' => 'btn btn-block btn-back']) ?>
-   </div>
-</div>
+<div class="assignment-index">
+    <h1><?=$this->title;?></h1>
 
-<div class="col-xs-12 col-lg-12">
- <div class="box box-primary view-item no-padding">
-  <div class="box-header with-border">
-    <i class="fa fa-user"></i>
-    <h3 class="box-title text-aqua"><?= Yii::t('rbac-admin', '<b>User</b>') ?> : <?= Html::encode($model->{$usernameField}) ?></h3>
-  </div><!-- /.box-header -->
-  <div class="box-body">
-  <div class="assignment-index row">
-   <div class="col-xs-12 col-lg-12">
-    <div class="col-lg-5 col-sm-5 col-xs-12">
-        <?= Yii::t('rbac-admin', '<b>Available</b>') ?>:
-		<div class="form-group has-feedback">
-			<input name="search_av" type="text" class="form-control role-search" placeholder="Search..." data-target="avaliable"/>
-			<span class="glyphicon glyphicon-search form-control-feedback"></span>
-		</div>
-        <?php
-        echo Html::listBox('roles', '', $avaliable, [
-            'id' => 'avaliable',
-            'multiple' => true,
-            'size' => 20,
-            'style' => 'width:100%;padding:5px']);
-        ?>
+    <div class="row">
+        <div class="col-sm-5">
+            <input class="form-control search" data-target="available"
+                   placeholder="<?=Yii::t('rbac-admin', 'Search for available');?>">
+            <select multiple size="20" class="form-control list" data-target="available">
+            </select>
+        </div>
+        <div class="col-sm-1">
+            <br><br>
+            <?=Html::a('&gt;&gt;' . $animateIcon, ['assign', 'id' => (string) $model->id], [
+    'class' => 'btn btn-success btn-assign',
+    'data-target' => 'available',
+    'title' => Yii::t('rbac-admin', 'Assign'),
+]);?><br><br>
+            <?=Html::a('&lt;&lt;' . $animateIcon, ['revoke', 'id' => (string) $model->id], [
+    'class' => 'btn btn-danger btn-assign',
+    'data-target' => 'assigned',
+    'title' => Yii::t('rbac-admin', 'Remove'),
+]);?>
+        </div>
+        <div class="col-sm-5">
+            <input class="form-control search" data-target="assigned"
+                   placeholder="<?=Yii::t('rbac-admin', 'Search for assigned');?>">
+            <select multiple size="20" class="form-control list" data-target="assigned">
+            </select>
+        </div>
     </div>
-    <div class="col-lg-2 col-sm-2 col-xs-12 text-center">
-        <br><br>
-        <?php
-        echo Html::a('>>', '#', ['class' => 'btn btn-success', 'title' => 'Assign', 'data-action' => 'assign']) . '<br><br>';
-        echo Html::a('<<', '#', ['class' => 'btn btn-danger', 'title' => 'Delete', 'data-action' => 'delete']) . '<br>';
-        ?>
-	<br><br>
-    </div>
-    <div class="col-lg-5 col-sm-5 col-xs-12">
-        <?= Yii::t('rbac-admin', '<b>Assigned</b>') ?>:
-		<div class="form-group has-feedback">
-			<input name="search_asgn" type="text" class="form-control role-search" placeholder="Search..." data-target="assigned"/>
-			<span class="glyphicon glyphicon-search form-control-feedback"></span>
-		</div>
-        <?php
-        echo Html::listBox('roles', '', $assigned, [
-            'id' => 'assigned',
-            'multiple' => true,
-            'size' => 20,
-            'style' => 'width:100%;padding:5px']);
-        ?>
-    </div>
-   </div>
-  </div>
-  </div>
- </div>
 </div>
-<?php
-$this->render('_script',['id'=>$model->{$idField}]);
-?>

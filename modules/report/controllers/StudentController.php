@@ -120,7 +120,6 @@ class StudentController extends Controller
 		return $this->render('stu_info_report',[
       				'student_data'=>$student_data,'selected_list'=>$selected_list,'query'=>$query,
 			]);	
-	break;		
 	}
 	return $this->render('stu_report_view',
 			['model'=>$model,'info'=>$info,

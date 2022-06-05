@@ -1,7 +1,13 @@
 yii2-widget-switchinput
 =======================
 
-The SwitchInput widget turns checkboxes and radio buttons into toggle switchinputes. The plugin is a wrapper for the [Bootstrap Switch Plugin](http://www.bootstrap-switchinput.org) and is specially styled for Bootstrap 3.
+[![Latest Stable Version](https://poser.pugx.org/kartik-v/yii2-widget-switchinput/v/stable)](https://packagist.org/packages/kartik-v/yii2-widget-switchinput)
+[![License](https://poser.pugx.org/kartik-v/yii2-widget-switchinput/license)](https://packagist.org/packages/kartik-v/yii2-widget-switchinput)
+[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-widget-switchinput/downloads)](https://packagist.org/packages/kartik-v/yii2-widget-switchinput)
+[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-widget-switchinput/d/monthly)](https://packagist.org/packages/kartik-v/yii2-widget-switchinput)
+[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-widget-switchinput/d/daily)](https://packagist.org/packages/kartik-v/yii2-widget-switchinput)
+
+The SwitchInput widget turns checkboxes and radio buttons into toggle switchinputes. The plugin is a wrapper for the [Bootstrap Switch Plugin](http://www.bootstrap-switch.org) and is specially styled for Bootstrap 3.
 
 > NOTE: This extension is a sub repo split of [yii2-widgets](https://github.com/kartik-v/yii2-widgets). The split has been done since 08-Nov-2014 to allow developers to install this specific widget in isolation if needed. One can also use the extension the previous way with the whole suite of [yii2-widgets](http://demos.krajee.com/widgets).
 
@@ -29,7 +35,7 @@ to the ```require``` section of your `composer.json` file.
 
 ## Demo
 
-You can refer detailed [documentation and demos](http://demos.krajee.com/widget-details/switchinputinput) on usage of the extension.
+You can refer detailed [documentation and demos](http://demos.krajee.com/widget-details/switchinput) on usage of the extension.
 
 ## Usage
 

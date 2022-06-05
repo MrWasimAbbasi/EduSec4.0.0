@@ -11,16 +11,7 @@ use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\web\View;
 use Yii;
-?>
-<style>
-.glyphicon-remove-circle {
-  color : #C9302C;
-}
-.glyphicon-ok-circle {
-  color : #449D44;
-}
-</style>
-<?php
+
 /**
  * @author Aris Karageorgos <aris@phe.me>
  */
@@ -32,14 +23,68 @@ class ToggleColumn extends DataColumn
      */
     public $action = 'toggle';
 
+
+    /**
+     * @var string pk field name
+     */
+    public $primaryKey = 'primaryKey';
+
     /**
      * Whether to use ajax or not
      * @var bool
      */
     public $enableAjax = true;
 
+    /**
+     * @var string glyphicon for 'on' value
+     */
+    public $iconOn = 'ok';
+
+    /**
+     * @var string glyphicon for 'off' value
+     */
+    public $iconOff = 'remove';
+
+    /**
+     * @var string text to display on the 'on' link
+     */
+    public $onText;
+
+    /**
+     * @var string text to display on the 'off' link
+     */
+    public $offText;
+    
+    /**
+     * @var string text to display next to the 'on' link
+     */
+    public $displayValueText = false;
+    
+    /**
+     * @var string text to display next to the 'on' link
+     */
+    public $onValueText;
+    
+    /**
+     * @var string text to display next to the 'off' link
+     */
+    public $offValueText;
+    
+
     public function init()
     {
+        if ($this->onText === null) {
+            $this->onText = Yii::t('app', 'On');
+        }
+        if ($this->offText === null) {
+            $this->offText = Yii::t('app', 'Off');
+        }
+        if ($this->onValueText === null) {
+            $this->onValueText = Yii::t('app', 'Active');
+        }
+        if ($this->offValueText === null) {
+            $this->offValueText = Yii::t('app', 'Inactive');
+        }
         if ($this->enableAjax) {
             $this->registerJs();
         }
@@ -50,37 +95,22 @@ class ToggleColumn extends DataColumn
      */
     protected function renderDataCellContent($model, $key, $index)
     {
-	/* @Edited By AmitG  */
-	if(get_class($model) == 'app\modules\dashboard\models\Notice')
-        	$url = [$this->action, 'id' => $model->notice_id];
-
-	if(get_class($model) == 'app\modules\dashboard\models\MsgOfDay')
-		$url = [$this->action, 'id' => $model->msg_of_day_id];
-
-	if(get_class($model) == 'app\modules\fees\models\FeesCollectCategory')
-		$url = [$this->action, 'id' => $model->fees_collect_category_id];
-
-	if(get_class($model) == 'app\modules\course\models\Courses') 
-		$url = [$this->action, 'id' => $model->course_id];
-
-	if(get_class($model) == 'app\modules\course\models\Batches')
-		$url = [$this->action, 'id' => $model->batch_id];
-
-	if(get_class($model) == 'app\modules\course\models\Section')
-		$url = [$this->action, 'id' => $model->section_id];
+        $url = [$this->action, 'id' => $model->{$this->primaryKey}];
 
         $attribute = $this->attribute;
         $value = $model->$attribute;
-	
-        if ($value === null || $value == 0 ) {		// 4-5-2015   $value=true replace with $value=0
-            $icon = 'ok';
-            $title = Yii::t('yii', 'Active');
+
+        if ($value === null || $value == true) {
+            $icon = $this->iconOn;
+            $title = $this->offText;
+            $valueText = $this->onValueText;
         } else {
-            $icon = 'remove';
-            $title = Yii::t('yii', 'InActive');
+            $icon = $this->iconOff;
+            $title = $this->onText;
+            $valueText = $this->offValueText;
         }
         return Html::a(
-            '<span class="glyphicon glyphicon-' . $icon . '-circle" style="font-size:25px"></span>',
+            '<span class="glyphicon glyphicon-' . $icon . '"></span>',
             $url,
             [
                 'title' => $title,
@@ -88,7 +118,7 @@ class ToggleColumn extends DataColumn
                 'data-method' => 'post',
                 'data-pjax' => '0',
             ]
-        );
+        ) . ( $this->displayValueText ? " {$valueText}" : "" );
     }
 
     /**
@@ -96,11 +126,14 @@ class ToggleColumn extends DataColumn
      */
     public function registerJs()
     {
-        $js = <<< JS
-$("a.toggle-column").on("click", function(e) {
+        if(Yii::$app->request->isAjax) {
+            return;
+        }
+        $js = <<<'JS'
+$(document.body).on("click", "a.toggle-column", function(e) {
     e.preventDefault();
     $.post($(this).attr("href"), function(data) {
-        var pjaxId = $(e.target).closest(".grid-view").parent().attr("id");
+        var pjaxId = $(e.target).closest("[data-pjax-container]").attr("id");
         $.pjax.reload({container:"#" + pjaxId});
     });
     return false;

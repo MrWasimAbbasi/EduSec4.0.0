@@ -93,7 +93,7 @@ class SliderInput extends InputWidget
 
         if ($this->hasModel()) {
             echo Html::activeHiddenInput($this->model, $this->attribute, $this->options);
-            $this->clientOptions['value'] = $this->model{$this->attribute};
+            $this->clientOptions['value'] = Html::getAttributeValue($this->model, $this->attribute);
         } else {
             echo Html::hiddenInput($this->name, $this->value, $this->options);
             $this->clientOptions['value'] = $this->value;
@@ -101,7 +101,7 @@ class SliderInput extends InputWidget
 
         if (!isset($this->clientEvents['slide'])) {
             $this->clientEvents['slide'] = 'function (event, ui) {
-                $("#' . $this->options['id'] . '").val(ui.value);
+                jQuery("#' . $this->options['id'] . '").val(ui.value);
             }';
         }
 

@@ -13,13 +13,14 @@
  *
  * Example:
  * <code>
- * $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 587, 'tls')
+ * $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
  *   ->setAuthMode('XOAUTH2')
  *   ->setUsername('YOUR_EMAIL_ADDRESS')
  *   ->setPassword('YOUR_ACCESS_TOKEN');
  * </code>
  *
- * @author     xu.li<AthenaLightenedMyPath@gmail.com>
+ * @author xu.li<AthenaLightenedMyPath@gmail.com>
+ *
  * @see        https://developers.google.com/google-apps/gmail/xoauth2_protocol
  */
 class Swift_Transport_Esmtp_Auth_XOAuth2Authenticator implements Swift_Transport_Esmtp_Authenticator
@@ -35,30 +36,24 @@ class Swift_Transport_Esmtp_Auth_XOAuth2Authenticator implements Swift_Transport
     }
 
     /**
-     * Try to authenticate the user with $email and $token.
-     *
-     * @param Swift_Transport_SmtpAgent $agent
-     * @param string                    $email
-     * @param string                    $token
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function authenticate(Swift_Transport_SmtpAgent $agent, $email, $token)
     {
         try {
             $param = $this->constructXOAuth2Params($email, $token);
-            $agent->executeCommand("AUTH XOAUTH2 ".$param."\r\n", array(235));
+            $agent->executeCommand('AUTH XOAUTH2 '.$param."\r\n", [235]);
 
             return true;
         } catch (Swift_TransportException $e) {
-            $agent->executeCommand("RSET\r\n", array(250));
+            $agent->executeCommand("RSET\r\n", [250]);
 
-            return false;
+            throw $e;
         }
     }
 
     /**
-     * Construct the auth parameter
+     * Construct the auth parameter.
      *
      * @see https://developers.google.com/google-apps/gmail/xoauth2_protocol#the_sasl_xoauth2_mechanism
      */

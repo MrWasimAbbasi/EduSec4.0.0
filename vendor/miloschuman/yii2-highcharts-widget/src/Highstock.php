@@ -5,8 +5,7 @@
  *
  * @author Milo Schuman <miloschuman@gmail.com>
  * @link https://github.com/miloschuman/yii2-highcharts/
- * @license http://www.opensource.org/licenses/mit-license.php MIT License
- * @version 4.0.4
+ * @license https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace miloschuman\highcharts;
@@ -17,6 +16,6 @@ namespace miloschuman\highcharts;
 class Highstock extends Highcharts
 {
 
-    protected $constr = 'StockChart';
-    protected $baseScript = 'highstock';
+    protected $constr = 'stockChart';
+    protected $baseScript = 'modules/stock';
 }

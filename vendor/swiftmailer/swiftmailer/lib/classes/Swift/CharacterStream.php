@@ -15,7 +15,7 @@
  * Classes implementing this interface may use a subsystem which requires less
  * memory than working with large strings of data.
  *
- * @author     Chris Corbyn
+ * @author Chris Corbyn
  */
 interface Swift_CharacterStream
 {
@@ -28,8 +28,6 @@ interface Swift_CharacterStream
 
     /**
      * Set the CharacterReaderFactory for multi charset support.
-     *
-     * @param Swift_CharacterReaderFactory $factory
      */
     public function setCharacterReaderFactory(Swift_CharacterReaderFactory $factory);
 
@@ -52,7 +50,7 @@ interface Swift_CharacterStream
      * Read $length characters from the stream and move the internal pointer
      * $length further into the stream.
      *
-     * @param int     $length
+     * @param int $length
      *
      * @return string
      */
@@ -62,7 +60,7 @@ interface Swift_CharacterStream
      * Read $length characters from the stream and return a 1-dimensional array
      * containing there octet values.
      *
-     * @param int     $length
+     * @param int $length
      *
      * @return int[]
      */
@@ -78,7 +76,7 @@ interface Swift_CharacterStream
     /**
      * Move the internal pointer to $charOffset in the stream.
      *
-     * @param int     $charOffset
+     * @param int $charOffset
      */
     public function setPointer($charOffset);
 

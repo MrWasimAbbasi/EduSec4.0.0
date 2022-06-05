@@ -9,9 +9,11 @@
  */
 
 /**
- * An OpenDKIM Specific Header using only raw header datas without encoding
+ * An OpenDKIM Specific Header using only raw header datas without encoding.
  *
- * @author     De Cock Xavier <xdecock@gmail.com>
+ * @author De Cock Xavier <xdecock@gmail.com>
+ *
+ * @deprecated since SwiftMailer 6.1.0; use Swift_Signers_DKIMSigner instead.
  */
 class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
 {
@@ -20,24 +22,21 @@ class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
      *
      * @var string
      */
-    private $_value;
+    private $value;
 
     /**
-     * The name of this Header
+     * The name of this Header.
+     *
      * @var string
      */
-    private $_fieldName;
+    private $fieldName;
 
     /**
-     * Creates a new SimpleHeader with $name.
-     *
-     * @param string                   $name
-     * @param Swift_Mime_HeaderEncoder $encoder
-     * @param Swift_Mime_Grammar       $grammar
+     * @param string $name
      */
     public function __construct($name)
     {
-        $this->_fieldName = $name;
+        $this->fieldName = $name;
     }
 
     /**
@@ -84,7 +83,7 @@ class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -94,7 +93,7 @@ class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
      */
     public function setValue($value)
     {
-        $this->_value = $value;
+        $this->value = $value;
     }
 
     /**
@@ -104,7 +103,7 @@ class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
      */
     public function getFieldBody()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -114,20 +113,21 @@ class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
      */
     public function toString()
     {
-        return $this->_fieldName.': '.$this->_value;
+        return $this->fieldName.': '.$this->value."\r\n";
     }
 
     /**
-     * Set the Header FieldName
-	 * @see Swift_Mime_Header::getFieldName()
-	 */
+     * Set the Header FieldName.
+     *
+     * @see Swift_Mime_Header::getFieldName()
+     */
     public function getFieldName()
     {
-        return $this->_fieldName;
+        return $this->fieldName;
     }
 
     /**
-     * Ignored
+     * Ignored.
      */
     public function setCharset($charset)
     {

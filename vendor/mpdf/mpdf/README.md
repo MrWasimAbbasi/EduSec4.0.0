@@ -1,150 +1,146 @@
-mPDF is a PHP class which generates PDF files from UTF-8 encoded HTML. It is based on [FPDF](http://www.fpdf.org/) and [HTML2FPDF](http://html2fpdf.sourceforge.net/) (see [CREDITS](CREDITS.txt)), with a number of enhancements. mPDF was written by Ian Back and is released under the [GNU GPL v2 licence](LICENSE.txt).
+mPDF is a PHP library which generates PDF files from UTF-8 encoded HTML.
+
+It is based on [FPDF](http://www.fpdf.org/) and [HTML2FPDF](http://html2fpdf.sourceforge.net/)
+(see [CREDITS](CREDITS.txt)), with a number of enhancements. mPDF was written by Ian Back and is released
+under the [GNU GPL v2 licence](LICENSE.txt).
+
+[![Latest Stable Version](https://poser.pugx.org/mpdf/mpdf/v/stable)](https://packagist.org/packages/mpdf/mpdf)
+[![Total Downloads](https://poser.pugx.org/mpdf/mpdf/downloads)](https://packagist.org/packages/mpdf/mpdf)
+[![License](https://poser.pugx.org/mpdf/mpdf/license)](https://packagist.org/packages/mpdf/mpdf)
+
+
+> ⚠ If you are viewing this file on mPDF GitHub repository homepage or on Packagist, please note that
+> the default repository branch is `development` which can differ from the last stable release.
+
+Requirements
+============
+
+PHP versions and extensions
+---------------------------
+
+- `mPDF >=7.0` is supported on `PHP ^5.6 || ~7.0.0 || ~7.1.0 || ~7.2.0`
+- `PHP 7.3` is supported since `mPDF v7.1.7`
+- `PHP 7.4` is supported since `mPDF v8.0.4`
+- `PHP 8.0` is supported since `mPDF v8.0.10`
+- `PHP 8.1` is supported as of `mPDF v8.0.13`
+
+PHP `mbstring` and `gd` extensions have to be loaded.
+
+Additional extensions may be required for some advanced features such as `zlib` for compression of output and
+embedded resources such as fonts, `bcmath` for generating barcodes or `xml` for character set conversion
+and SVG handling.
+
+Known server caveats
+--------------------
+
+mPDF has some problems with fetching external HTTP resources with single threaded servers such as `php -S`. A proper
+server such as nginx (php-fpm) or Apache is recommended.
+
+Support us
+==========
+
+Consider supporting development of mPDF with a donation of any value. [Donation button][1] can be found on the
+[main page of the documentation][1].
 
 Installation
 ============
-   * Download the .zip file and unzip it
-   * Create a folder e.g. /mpdf on your server
-   * Upload all of the files to the server, maintaining the folders as they are
-   * Ensure that you have write permissions set (CHMOD 6xx or 7xx) for the following folders:
 
-     /ttfontdata/ - used to cache font data; improves performance a lot
+Official installation method is via composer and its packagist package [mpdf/mpdf](https://packagist.org/packages/mpdf/mpdf).
 
-     /tmp/ - used for some images and ProgressBar
+```
+$ composer require mpdf/mpdf
+```
 
-     /graph_cache/ - if you are using [JpGraph](http://jpgraph.net) in conjunction with mPDF
-
-To test the installation, point your browser to the basic example file:
-
-    [path_to_mpdf_folder]/mpdf/examples/example01_basic.php
-
-If you wish to define a different folder for temporary files rather than /tmp/ see the note on [Folder for temporary files](http://mpdf1.com/manual/index.php?tid=445) in the section on Installation & Setup in the [manual](http://mpdf1.com/manual/).
-
-If you have problems, please read the section on [troubleshooting](http://mpdf1.com/manual/index.php?tid=32) in the manual.
-
-
-Fonts
+Usage
 =====
-Let us refer to font names in 2 ways:
 
-1. "CSS font-family name" - mPDF is designed primarily to read HTML and CSS. This is the name used in CSS e.g.
+The simplest usage (since version 7.0) of the library would be as follows:
 
-     &lt;p style="font-family: 'Trebuchet MS';"&gt;
+```php
+<?php
 
-2. "mPDF font-family name" - the name used internally to process fonts. This could be anything you like, but by default mPDF will convert CSS font-family names by removing any spaces and changing to lowercase. Reading the name above, mPDF will look for a "mPDF font-family name" of:
+require_once __DIR__ . '/vendor/autoload.php';
 
-     'trebuchetms'
+$mpdf = new \Mpdf\Mpdf();
+$mpdf->WriteHTML('<h1>Hello world!</h1>');
+$mpdf->Output();
 
-The configurable values referred to below are set in the config_fonts.php file.
+```
 
-When parsing HTML/CSS, mPDF will read the CSS font-family name (e.g. 'Trebuchet MS') and convert 
-by removing any spaces and changing to lowercase, to look for a mPDF font-family name (trebuchetms). 
+This will output the PDF inline to the browser as `application/pdf` Content-type.
 
-Next it will look for a translation (if set) in config_font.php e.g.:
-
-    $this->fonttrans = array(
-	    'trebuchetms' => 'trebuchet'
-    )
-
-Now the mPDF font-family name to be used is 'trebuchet'
-
-If you wish to make this font available, you need to specify the Truetype .ttf font files for each variant. These should be defined in config_font.php in the array:
-
-    $this->fontdata = array(
-	    "trebuchet" => array(
-		    'R' => "trebuc.ttf",
-		    'B' => "trebucbd.ttf",
-		    'I' => "trebucit.ttf",
-		    'BI' => "trebucbi.ttf",
-		    )
-    )
-
-This is the array which determines whether a font is available to mPDF. Each font-family must have a Regular ['R'] file defined - the others (bold, italic, bold-italic) are optional.
-
-mPDF will try to load the font-file. If you have defined _MPDF_SYSTEM_TTFONTS at the top of the 
-config_fonts.php file, it will first look for the font-file there. This is useful if you are running mPDF on a computer which already has a folder with TTF fonts in (e.g. on Windows)
-
-If the font-file is not there, or _MPDF_SYSTEM_TTFONTS is not defined, mPDF will look in the folder
-
-    /[your_path_to_mpdf]/ttfonts/
-
-Note that the font-file names are case-sensitive and can contain capitals.
-
-If the folder /ttfontdata/ is writeable (CHMOD 644 or 755), mPDF will save files there which it can re-use next time it accesses a particular font. This will significantly improve processing time
-and is strongly recommended. 
-
-mPDF should be able to read most TrueType Unicode font files with a .ttf extension. Truetype fonts with .otf extension that are OpenType also work OK. TrueType collections (.ttc) will also work if they contain TrueType Unicode fonts.
-
-
-Character substitution
-----------------------
-Most people will have access to a Pan-Unicode font with most Unicode characters in it such as 
-Arial Unicode MS. Set:
-
-    $this->backupSubsFont = array('arialunicodems');
-
-at the top of the config_fonts.php file to use this font when substituting any characters not found in the specific font being used.
-
-Example:
-You can set:
-
-    $mpdf->useSubstitutions = true;
-
-at runtime, or
-
-    $this->useSubstitutions = true;
-
-in the config.php file
-
-<p style="font-family: 'Comic Sans MS'">This text contains a Thai character &#3617; which does not exist in the Comic Sans MS font file</p>
-
-When useSubstitutions is true, mPDF will try to find substitutions for any missing characters:
-1) firstly looks if the character is available in the inbuilt Symbols or ZapfDingbats fonts;
-2) [If defined] looks in each of the the font(s) set by $this->backupSubsFont array
-
-NB There is an increase in processing time when using substitutions, and even more so if
-a backupSubsFont is defined.
-
-Controlling mPDF mode
+Setup & Configuration
 =====================
-The first parameter of new mPDF('') works as follows:
 
-* new mPDF('c') - forces mPDF to only use the built-in [c]ore Adobe fonts (Helvetica, Times etc)
+All [configuration directives](https://mpdf.github.io/reference/mpdf-variables/overview.html) can
+be set by the `$config` parameter of the constructor.
 
-* new mPDF('') - default - font subsetting behaviour is determined by the configurable variables $this->maxTTFFilesize and $this->percentSubset (see below)
+It is recommended to set one's own temporary directory via `tempDir` configuration variable.
+The directory must have write permissions (mode `775` is recommended) for users using mPDF
+(typically `cli`, `webserver`, `fpm`).
 
-  Default values are set so that:
-  1) Very large font files are always subset
-  2) Fonts are embedded as subsets if < 30% of the characters are used
-
-* new mPDF('..+aCJK')
-
-  new mPDF('+aCJK')
-
-  new mPDF('..-aCJK')
-
-  new mPDF('-aCJK')
-
-  Used optionally together with a language or language/country code, +aCJK will force mPDF to use  the Adobe non-embedded CJK fonts when a passage is marked with e.g. "lang: ja"
-
-  This can be used at runtime to override the value set for $mpdf->useAdobeCJK in config.php
-
-  Use in conjunction with settings in config_cp.php
-
-For backwards compatibility, new mPDF('-s') and new mPDF('s') will force subsetting by setting
-
-    $this->percentSubset=100
-
-new mPDF('utf-8-s') and new mPDF('ar-s') are also recognised
+**Warning:** mPDF will clean up old temporary files in the temporary directory. Choose a path dedicated to mPDF only.
 
 
-Configuration variables changed
-===============================
-Configuration variables are documented in the on-line [manual](http://mpdf1.com/manual/).
+```php
+<?php
 
+$mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__ . '/tmp']);
 
-Font folders
+```
+
+By default, the temporary directory will be inside vendor directory and will have write permissions from
+`post_install` composer script.
+
+For more information about custom temporary directory see the note on
+[Folder for temporary files](https://mpdf.github.io/installation-setup/folders-for-temporary-files.html)
+in the section on Installation & Setup in the [manual][1].
+
+If you have problems, please read the section on
+[troubleshooting](https://mpdf.github.io/troubleshooting/known-issues.html) in the manual.
+
+About CSS support and development state
+=======================================
+
+mPDF as a whole is a quite dated software. Nowadays, better alternatives are available, albeit not written in PHP.
+
+Use mPDF if you cannot use non-PHP approach to generate PDF files or if you want to leverage some of the benefits of mPDF
+over browser approach – color handling, pre-print, barcodes support, headers and footers, page numbering, TOCs, etc.
+But beware that a HTML/CSS template tailored for mPDF might be necessary.
+
+If you are looking for state of the art CSS support, mirroring existing HTML pages to PDF, use headless Chrome.
+
+mPDF will still be updated to enhance some internal capabilities and to support newer versions of PHP,
+but better and/or newer CSS support will most likely not be implemented.
+
+Online manual
+=============
+
+Online manual is available at https://mpdf.github.io/.
+
+General troubleshooting
+=============
+
+For general questions or troubleshooting please use [Discussions](https://github.com/mpdf/mpdf/discussions).
+
+You can also use the [mpdf tag](https://stackoverflow.com/questions/tagged/mpdf) at Stack Overflow as the StackOverflow user base is more likely to answer you in a timely manner.
+
+Contributing
 ============
-If you wish to define your own font file folders (perhaps to share), you can define the 2 constants in your script before including the mpdf.php script e.g.:
 
-    define('_MPDF_TTFONTPATH','your_path/ttfonts/'); 		
-    define('_MPDF_TTFONTDATAPATH','your_path/ttfontdata/'); 	// should be writeable
+Before submitting issues and pull requests please read the [CONTRIBUTING.md](https://github.com/mpdf/mpdf/blob/development/.github/CONTRIBUTING.md) file.
+
+Unit Testing
+============
+
+Unit testing for mPDF is done using [PHPUnit](https://phpunit.de/).
+
+To get started, run `composer install` from the command line while in the mPDF root directory
+(you'll need [composer installed first](https://getcomposer.org/download/)).
+
+To execute tests, run `composer test` from the command line while in the mPDF root directory.
+
+Any assistance writing unit tests for mPDF is greatly appreciated. If you'd like to help, please
+note that any PHP file located in the `/tests/` directory will be autoloaded when unit testing.
+
+[1]: https://mpdf.github.io

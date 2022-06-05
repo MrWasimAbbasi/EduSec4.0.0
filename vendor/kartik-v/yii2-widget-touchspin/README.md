@@ -1,5 +1,22 @@
-yii2-widget-touchspin
-=======================
+<h1 align="center">
+    <a href="http://demos.krajee.com" title="Krajee Demos" target="_blank">
+        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/krajee-logo-b.png" alt="Krajee Logo"/>
+    </a>
+    <br>
+    yii2-widget-touchspin
+    <hr>
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DTP3NZQ6G2AYU"
+       title="Donate via Paypal" target="_blank">
+        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/donate.png" alt="Donate"/>
+    </a>
+</h1>
+
+[![Stable Version](https://poser.pugx.org/kartik-v/yii2-widget-touchspin/v/stable)](https://packagist.org/packages/kartik-v/yii2-widget-touchspin)
+[![Unstable Version](https://poser.pugx.org/kartik-v/yii2-widget-touchspin/v/unstable)](https://packagist.org/packages/kartik-v/yii2-widget-touchspin)
+[![License](https://poser.pugx.org/kartik-v/yii2-widget-touchspin/license)](https://packagist.org/packages/kartik-v/yii2-widget-touchspin)
+[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-widget-touchspin/downloads)](https://packagist.org/packages/kartik-v/yii2-widget-touchspin)
+[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-widget-touchspin/d/monthly)](https://packagist.org/packages/kartik-v/yii2-widget-touchspin)
+[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-widget-touchspin/d/daily)](https://packagist.org/packages/kartik-v/yii2-widget-touchspin)
 
 The TouchSpin widget is a Yii 2 wrapper for for the [bootstrap-touchspin](http://www.virtuosoft.eu/code/bootstrap-touchspin) plugin by István Ujj-Mészáros, with certain additional enhancements. This input widget is a mobile and touch friendly input spinner component for Bootstrap 3. You can use the widget buttons to rapidly increase and decrease numeric and/or decimal values in your input field. The widget can be setup to include model validation rules for the related model attribute.
 
@@ -23,13 +40,13 @@ or add
 
 to the ```require``` section of your `composer.json` file.
 
-## Latest Release
+## Release Changes
 
-> NOTE: The latest version of the module is v1.2.0 released on 04-Dec-2014. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-widget-touchspin/blob/master/CHANGE.md) for details.
+> NOTE: Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-widget-touchspin/blob/master/CHANGE.md) for details on changes to various releases.
 
 ## Demo
 
-You can refer detailed [documentation and demos](http://demos.krajee.com/widget-details/touchspininput) on usage of the extension.
+You can refer detailed [documentation and demos](http://demos.krajee.com/widget-details/touchspin) on usage of the extension.
 
 ## Usage
 

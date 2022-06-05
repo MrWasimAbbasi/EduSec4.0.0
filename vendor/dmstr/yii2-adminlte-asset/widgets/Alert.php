@@ -7,8 +7,8 @@
 
 namespace dmstr\widgets;
 
-use \yii\bootstrap\Alert as BootstrapAlert;
-use \yii\bootstrap\Widget;
+use yii\bootstrap\Alert as BootstrapAlert;
+use yii\bootstrap\Widget;
 
 /**
  * Alert widget renders a message from session flash for AdminLTE alerts. All flash messages are displayed
@@ -39,23 +39,23 @@ class Alert extends Widget
     public $alertTypes = [
         'error' => [
             'class' => 'alert-danger',
-            'icon' => '<i class="fa fa-ban"></i>',
+            'icon' => '<i class="icon fa fa-ban"></i>',
         ],
         'danger' => [
             'class' => 'alert-danger',
-            'icon' => '<i class="fa fa-ban"></i>',
+            'icon' => '<i class="icon fa fa-ban"></i>',
         ],
         'success' => [
             'class' => 'alert-success',
-            'icon' => '<i class="fa fa-check"></i>',
+            'icon' => '<i class="icon fa fa-check"></i>',
         ],
         'info' => [
             'class' => 'alert-info',
-            'icon' => '<i class="fa fa-info"></i>',
+            'icon' => '<i class="icon fa fa-info"></i>',
         ],
         'warning' => [
             'class' => 'alert-warning',
-            'icon' => '<i class="fa fa-warning"></i>',
+            'icon' => '<i class="icon fa fa-warning"></i>',
         ],
     ];
 
@@ -64,6 +64,12 @@ class Alert extends Widget
      */
     public $closeButton = [];
 
+
+    /**
+     * @var boolean whether to removed flash messages during AJAX requests
+     */
+    public $isAjaxRemoveFlash = true;
+    
     /**
      * Initializes the widget.
      * This method will register the bootstrap asset bundle. If you override this method,
@@ -86,13 +92,14 @@ class Alert extends Widget
                     $this->options['id'] = $this->getId() . '-' . $type;
 
                     echo BootstrapAlert::widget([
-                            'body' => $message . $this->alertTypes[$type]['icon'],
+                            'body' => $this->alertTypes[$type]['icon'] . $message,
                             'closeButton' => $this->closeButton,
                             'options' => $this->options,
                         ]);
                 }
-
-                $session->removeFlash($type);
+                if ($this->isAjaxRemoveFlash && !\Yii::$app->request->isAjax) {
+                    $session->removeFlash($type);
+                }
             }
         }
     }

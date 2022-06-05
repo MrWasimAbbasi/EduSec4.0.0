@@ -1,7 +1,8 @@
 <?php
 /**
  * FA.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 namespace rmrevin\yii\fontawesome;
@@ -13,9 +14,6 @@ namespace rmrevin\yii\fontawesome;
 class FA extends FontAwesome
 {
 
-    /** @var string CSS Class prefix */
-    public static $cssPrefix = 'fa';
-
     /**
      * Get all icon constants for dropdown list in example
      * @param bool $html whether to render icon as array value prefix
@@ -23,13 +21,16 @@ class FA extends FontAwesome
      */
     public static function getConstants($html = false)
     {
-        $arr = [];
+        $result = [];
         foreach ((new \ReflectionClass(get_class()))->getConstants() as $constant) {
-            $arr[static::$cssPrefix . ' ' . static::$cssPrefix . '-' . $constant] = ($html)
-                ? FA::icon($constant) . '&nbsp;&nbsp;' . $constant
+            $key = static::$cssPrefix . ' ' . static::$cssPrefix . '-' . $constant;
+
+            $result[$key] = ($html)
+                ? static::icon($constant) . '&nbsp;&nbsp;' . $constant
                 : $constant;
         }
-        return $arr;
+
+        return $result;
     }
 
     /**
@@ -43,13 +44,20 @@ class FA extends FontAwesome
      * });
      */
 
+    const _500PX = '500px';
+    const _ADDRESS_BOOK = 'address-book';
+    const _ADDRESS_BOOK_O = 'address-book-o';
+    const _ADDRESS_CARD = 'address-card';
+    const _ADDRESS_CARD_O = 'address-card-o';
     const _ADJUST = 'adjust';
     const _ADN = 'adn';
     const _ALIGN_CENTER = 'align-center';
     const _ALIGN_JUSTIFY = 'align-justify';
     const _ALIGN_LEFT = 'align-left';
     const _ALIGN_RIGHT = 'align-right';
+    const _AMAZON = 'amazon';
     const _AMBULANCE = 'ambulance';
+    const _AMERICAN_SIGN_LANGUAGE_INTERPRETING = 'american-sign-language-interpreting';
     const _ANCHOR = 'anchor';
     const _ANDROID = 'android';
     const _ANGELLIST = 'angellist';
@@ -80,16 +88,34 @@ class FA extends FontAwesome
     const _ARROWS_ALT = 'arrows-alt';
     const _ARROWS_H = 'arrows-h';
     const _ARROWS_V = 'arrows-v';
+    const _ASL_INTERPRETING = 'asl-interpreting';
+    const _ASSISTIVE_LISTENING_SYSTEMS = 'assistive-listening-systems';
     const _ASTERISK = 'asterisk';
     const _AT = 'at';
+    const _AUDIO_DESCRIPTION = 'audio-description';
     const _AUTOMOBILE = 'automobile';
     const _BACKWARD = 'backward';
+    const _BALANCE_SCALE = 'balance-scale';
     const _BAN = 'ban';
+    const _BANDCAMP = 'bandcamp';
     const _BANK = 'bank';
     const _BAR_CHART = 'bar-chart';
     const _BAR_CHART_O = 'bar-chart-o';
     const _BARCODE = 'barcode';
     const _BARS = 'bars';
+    const _BATH = 'bath';
+    const _BATHTUB = 'bathtub';
+    const _BATTERY = 'battery';
+    const _BATTERY_0 = 'battery-0';
+    const _BATTERY_1 = 'battery-1';
+    const _BATTERY_2 = 'battery-2';
+    const _BATTERY_3 = 'battery-3';
+    const _BATTERY_4 = 'battery-4';
+    const _BATTERY_EMPTY = 'battery-empty';
+    const _BATTERY_FULL = 'battery-full';
+    const _BATTERY_HALF = 'battery-half';
+    const _BATTERY_QUARTER = 'battery-quarter';
+    const _BATTERY_THREE_QUARTERS = 'battery-three-quarters';
     const _BED = 'bed';
     const _BEER = 'beer';
     const _BEHANCE = 'behance';
@@ -104,12 +130,17 @@ class FA extends FontAwesome
     const _BITBUCKET = 'bitbucket';
     const _BITBUCKET_SQUARE = 'bitbucket-square';
     const _BITCOIN = 'bitcoin';
+    const _BLACK_TIE = 'black-tie';
+    const _BLIND = 'blind';
+    const _BLUETOOTH = 'bluetooth';
+    const _BLUETOOTH_B = 'bluetooth-b';
     const _BOLD = 'bold';
     const _BOLT = 'bolt';
     const _BOMB = 'bomb';
     const _BOOK = 'book';
     const _BOOKMARK = 'bookmark';
     const _BOOKMARK_O = 'bookmark-o';
+    const _BRAILLE = 'braille';
     const _BRIEFCASE = 'briefcase';
     const _BTC = 'btc';
     const _BUG = 'bug';
@@ -122,7 +153,11 @@ class FA extends FontAwesome
     const _CAB = 'cab';
     const _CALCULATOR = 'calculator';
     const _CALENDAR = 'calendar';
+    const _CALENDAR_CHECK_O = 'calendar-check-o';
+    const _CALENDAR_MINUS_O = 'calendar-minus-o';
     const _CALENDAR_O = 'calendar-o';
+    const _CALENDAR_PLUS_O = 'calendar-plus-o';
+    const _CALENDAR_TIMES_O = 'calendar-times-o';
     const _CAMERA = 'camera';
     const _CAMERA_RETRO = 'camera-retro';
     const _CAR = 'car';
@@ -138,7 +173,9 @@ class FA extends FontAwesome
     const _CART_PLUS = 'cart-plus';
     const _CC = 'cc';
     const _CC_AMEX = 'cc-amex';
+    const _CC_DINERS_CLUB = 'cc-diners-club';
     const _CC_DISCOVER = 'cc-discover';
+    const _CC_JCB = 'cc-jcb';
     const _CC_MASTERCARD = 'cc-mastercard';
     const _CC_PAYPAL = 'cc-paypal';
     const _CC_STRIPE = 'cc-stripe';
@@ -160,12 +197,14 @@ class FA extends FontAwesome
     const _CHEVRON_RIGHT = 'chevron-right';
     const _CHEVRON_UP = 'chevron-up';
     const _CHILD = 'child';
+    const _CHROME = 'chrome';
     const _CIRCLE = 'circle';
     const _CIRCLE_O = 'circle-o';
     const _CIRCLE_O_NOTCH = 'circle-o-notch';
     const _CIRCLE_THIN = 'circle-thin';
     const _CLIPBOARD = 'clipboard';
     const _CLOCK_O = 'clock-o';
+    const _CLONE = 'clone';
     const _CLOSE = 'close';
     const _CLOUD = 'cloud';
     const _CLOUD_DOWNLOAD = 'cloud-download';
@@ -174,20 +213,26 @@ class FA extends FontAwesome
     const _CODE = 'code';
     const _CODE_FORK = 'code-fork';
     const _CODEPEN = 'codepen';
+    const _CODIEPIE = 'codiepie';
     const _COFFEE = 'coffee';
     const _COG = 'cog';
     const _COGS = 'cogs';
     const _COLUMNS = 'columns';
     const _COMMENT = 'comment';
     const _COMMENT_O = 'comment-o';
+    const _COMMENTING = 'commenting';
+    const _COMMENTING_O = 'commenting-o';
     const _COMMENTS = 'comments';
     const _COMMENTS_O = 'comments-o';
     const _COMPASS = 'compass';
     const _COMPRESS = 'compress';
     const _CONNECTDEVELOP = 'connectdevelop';
+    const _CONTAO = 'contao';
     const _COPY = 'copy';
     const _COPYRIGHT = 'copyright';
+    const _CREATIVE_COMMONS = 'creative-commons';
     const _CREDIT_CARD = 'credit-card';
+    const _CREDIT_CARD_ALT = 'credit-card-alt';
     const _CROP = 'crop';
     const _CROSSHAIRS = 'crosshairs';
     const _CSS3 = 'css3';
@@ -198,6 +243,8 @@ class FA extends FontAwesome
     const _DASHBOARD = 'dashboard';
     const _DASHCUBE = 'dashcube';
     const _DATABASE = 'database';
+    const _DEAF = 'deaf';
+    const _DEAFNESS = 'deafness';
     const _DEDENT = 'dedent';
     const _DELICIOUS = 'delicious';
     const _DESKTOP = 'desktop';
@@ -208,17 +255,25 @@ class FA extends FontAwesome
     const _DOT_CIRCLE_O = 'dot-circle-o';
     const _DOWNLOAD = 'download';
     const _DRIBBBLE = 'dribbble';
+    const _DRIVERS_LICENSE = 'drivers-license';
+    const _DRIVERS_LICENSE_O = 'drivers-license-o';
     const _DROPBOX = 'dropbox';
     const _DRUPAL = 'drupal';
+    const _EDGE = 'edge';
     const _EDIT = 'edit';
+    const _EERCAST = 'eercast';
     const _EJECT = 'eject';
     const _ELLIPSIS_H = 'ellipsis-h';
     const _ELLIPSIS_V = 'ellipsis-v';
     const _EMPIRE = 'empire';
     const _ENVELOPE = 'envelope';
     const _ENVELOPE_O = 'envelope-o';
+    const _ENVELOPE_OPEN = 'envelope-open';
+    const _ENVELOPE_OPEN_O = 'envelope-open-o';
     const _ENVELOPE_SQUARE = 'envelope-square';
+    const _ENVIRA = 'envira';
     const _ERASER = 'eraser';
+    const _ETSY = 'etsy';
     const _EUR = 'eur';
     const _EURO = 'euro';
     const _EXCHANGE = 'exchange';
@@ -226,11 +281,13 @@ class FA extends FontAwesome
     const _EXCLAMATION_CIRCLE = 'exclamation-circle';
     const _EXCLAMATION_TRIANGLE = 'exclamation-triangle';
     const _EXPAND = 'expand';
+    const _EXPEDITEDSSL = 'expeditedssl';
     const _EXTERNAL_LINK = 'external-link';
     const _EXTERNAL_LINK_SQUARE = 'external-link-square';
     const _EYE = 'eye';
     const _EYE_SLASH = 'eye-slash';
     const _EYEDROPPER = 'eyedropper';
+    const _FA = 'fa';
     const _FACEBOOK = 'facebook';
     const _FACEBOOK_F = 'facebook-f';
     const _FACEBOOK_OFFICIAL = 'facebook-official';
@@ -238,6 +295,7 @@ class FA extends FontAwesome
     const _FAST_BACKWARD = 'fast-backward';
     const _FAST_FORWARD = 'fast-forward';
     const _FAX = 'fax';
+    const _FEED = 'feed';
     const _FEMALE = 'female';
     const _FIGHTER_JET = 'fighter-jet';
     const _FILE = 'file';
@@ -263,6 +321,8 @@ class FA extends FontAwesome
     const _FILTER = 'filter';
     const _FIRE = 'fire';
     const _FIRE_EXTINGUISHER = 'fire-extinguisher';
+    const _FIREFOX = 'firefox';
+    const _FIRST_ORDER = 'first-order';
     const _FLAG = 'flag';
     const _FLAG_CHECKERED = 'flag-checkered';
     const _FLAG_O = 'flag-o';
@@ -275,9 +335,13 @@ class FA extends FontAwesome
     const _FOLDER_OPEN = 'folder-open';
     const _FOLDER_OPEN_O = 'folder-open-o';
     const _FONT = 'font';
+    const _FONT_AWESOME = 'font-awesome';
+    const _FONTICONS = 'fonticons';
+    const _FORT_AWESOME = 'fort-awesome';
     const _FORUMBEE = 'forumbee';
     const _FORWARD = 'forward';
     const _FOURSQUARE = 'foursquare';
+    const _FREE_CODE_CAMP = 'free-code-camp';
     const _FROWN_O = 'frown-o';
     const _FUTBOL_O = 'futbol-o';
     const _GAMEPAD = 'gamepad';
@@ -287,28 +351,49 @@ class FA extends FontAwesome
     const _GEAR = 'gear';
     const _GEARS = 'gears';
     const _GENDERLESS = 'genderless';
+    const _GET_POCKET = 'get-pocket';
+    const _GG = 'gg';
+    const _GG_CIRCLE = 'gg-circle';
     const _GIFT = 'gift';
     const _GIT = 'git';
     const _GIT_SQUARE = 'git-square';
     const _GITHUB = 'github';
     const _GITHUB_ALT = 'github-alt';
     const _GITHUB_SQUARE = 'github-square';
+    const _GITLAB = 'gitlab';
     const _GITTIP = 'gittip';
     const _GLASS = 'glass';
+    const _GLIDE = 'glide';
+    const _GLIDE_G = 'glide-g';
     const _GLOBE = 'globe';
     const _GOOGLE = 'google';
     const _GOOGLE_PLUS = 'google-plus';
+    const _GOOGLE_PLUS_CIRCLE = 'google-plus-circle';
+    const _GOOGLE_PLUS_OFFICIAL = 'google-plus-official';
     const _GOOGLE_PLUS_SQUARE = 'google-plus-square';
     const _GOOGLE_WALLET = 'google-wallet';
     const _GRADUATION_CAP = 'graduation-cap';
     const _GRATIPAY = 'gratipay';
+    const _GRAV = 'grav';
     const _GROUP = 'group';
     const _H_SQUARE = 'h-square';
     const _HACKER_NEWS = 'hacker-news';
+    const _HAND_GRAB_O = 'hand-grab-o';
+    const _HAND_LIZARD_O = 'hand-lizard-o';
     const _HAND_O_DOWN = 'hand-o-down';
     const _HAND_O_LEFT = 'hand-o-left';
     const _HAND_O_RIGHT = 'hand-o-right';
     const _HAND_O_UP = 'hand-o-up';
+    const _HAND_PAPER_O = 'hand-paper-o';
+    const _HAND_PEACE_O = 'hand-peace-o';
+    const _HAND_POINTER_O = 'hand-pointer-o';
+    const _HAND_ROCK_O = 'hand-rock-o';
+    const _HAND_SCISSORS_O = 'hand-scissors-o';
+    const _HAND_SPOCK_O = 'hand-spock-o';
+    const _HAND_STOP_O = 'hand-stop-o';
+    const _HANDSHAKE_O = 'handshake-o';
+    const _HARD_OF_HEARING = 'hard-of-hearing';
+    const _HASHTAG = 'hashtag';
     const _HDD_O = 'hdd-o';
     const _HEADER = 'header';
     const _HEADPHONES = 'headphones';
@@ -319,16 +404,33 @@ class FA extends FontAwesome
     const _HOME = 'home';
     const _HOSPITAL_O = 'hospital-o';
     const _HOTEL = 'hotel';
+    const _HOURGLASS = 'hourglass';
+    const _HOURGLASS_1 = 'hourglass-1';
+    const _HOURGLASS_2 = 'hourglass-2';
+    const _HOURGLASS_3 = 'hourglass-3';
+    const _HOURGLASS_END = 'hourglass-end';
+    const _HOURGLASS_HALF = 'hourglass-half';
+    const _HOURGLASS_O = 'hourglass-o';
+    const _HOURGLASS_START = 'hourglass-start';
+    const _HOUZZ = 'houzz';
     const _HTML5 = 'html5';
+    const _I_CURSOR = 'i-cursor';
+    const _ID_BADGE = 'id-badge';
+    const _ID_CARD = 'id-card';
+    const _ID_CARD_O = 'id-card-o';
     const _ILS = 'ils';
     const _IMAGE = 'image';
+    const _IMDB = 'imdb';
     const _INBOX = 'inbox';
     const _INDENT = 'indent';
+    const _INDUSTRY = 'industry';
     const _INFO = 'info';
     const _INFO_CIRCLE = 'info-circle';
     const _INR = 'inr';
     const _INSTAGRAM = 'instagram';
     const _INSTITUTION = 'institution';
+    const _INTERNET_EXPLORER = 'internet-explorer';
+    const _INTERSEX = 'intersex';
     const _IOXHOST = 'ioxhost';
     const _ITALIC = 'italic';
     const _JOOMLA = 'joomla';
@@ -356,6 +458,7 @@ class FA extends FontAwesome
     const _LINK = 'link';
     const _LINKEDIN = 'linkedin';
     const _LINKEDIN_SQUARE = 'linkedin-square';
+    const _LINODE = 'linode';
     const _LINUX = 'linux';
     const _LIST = 'list';
     const _LIST_ALT = 'list-alt';
@@ -367,13 +470,18 @@ class FA extends FontAwesome
     const _LONG_ARROW_LEFT = 'long-arrow-left';
     const _LONG_ARROW_RIGHT = 'long-arrow-right';
     const _LONG_ARROW_UP = 'long-arrow-up';
+    const _LOW_VISION = 'low-vision';
     const _MAGIC = 'magic';
     const _MAGNET = 'magnet';
     const _MAIL_FORWARD = 'mail-forward';
     const _MAIL_REPLY = 'mail-reply';
     const _MAIL_REPLY_ALL = 'mail-reply-all';
     const _MALE = 'male';
+    const _MAP = 'map';
     const _MAP_MARKER = 'map-marker';
+    const _MAP_O = 'map-o';
+    const _MAP_PIN = 'map-pin';
+    const _MAP_SIGNS = 'map-signs';
     const _MARS = 'mars';
     const _MARS_DOUBLE = 'mars-double';
     const _MARS_STROKE = 'mars-stroke';
@@ -383,25 +491,37 @@ class FA extends FontAwesome
     const _MEANPATH = 'meanpath';
     const _MEDIUM = 'medium';
     const _MEDKIT = 'medkit';
+    const _MEETUP = 'meetup';
     const _MEH_O = 'meh-o';
     const _MERCURY = 'mercury';
+    const _MICROCHIP = 'microchip';
     const _MICROPHONE = 'microphone';
     const _MICROPHONE_SLASH = 'microphone-slash';
     const _MINUS = 'minus';
     const _MINUS_CIRCLE = 'minus-circle';
     const _MINUS_SQUARE = 'minus-square';
     const _MINUS_SQUARE_O = 'minus-square-o';
+    const _MIXCLOUD = 'mixcloud';
     const _MOBILE = 'mobile';
     const _MOBILE_PHONE = 'mobile-phone';
+    const _MODX = 'modx';
     const _MONEY = 'money';
     const _MOON_O = 'moon-o';
     const _MORTAR_BOARD = 'mortar-board';
     const _MOTORCYCLE = 'motorcycle';
+    const _MOUSE_POINTER = 'mouse-pointer';
     const _MUSIC = 'music';
     const _NAVICON = 'navicon';
     const _NEUTER = 'neuter';
     const _NEWSPAPER_O = 'newspaper-o';
+    const _OBJECT_GROUP = 'object-group';
+    const _OBJECT_UNGROUP = 'object-ungroup';
+    const _ODNOKLASSNIKI = 'odnoklassniki';
+    const _ODNOKLASSNIKI_SQUARE = 'odnoklassniki-square';
+    const _OPENCART = 'opencart';
     const _OPENID = 'openid';
+    const _OPERA = 'opera';
+    const _OPTIN_MONSTER = 'optin-monster';
     const _OUTDENT = 'outdent';
     const _PAGELINES = 'pagelines';
     const _PAINT_BRUSH = 'paint-brush';
@@ -411,11 +531,14 @@ class FA extends FontAwesome
     const _PARAGRAPH = 'paragraph';
     const _PASTE = 'paste';
     const _PAUSE = 'pause';
+    const _PAUSE_CIRCLE = 'pause-circle';
+    const _PAUSE_CIRCLE_O = 'pause-circle-o';
     const _PAW = 'paw';
     const _PAYPAL = 'paypal';
     const _PENCIL = 'pencil';
     const _PENCIL_SQUARE = 'pencil-square';
     const _PENCIL_SQUARE_O = 'pencil-square-o';
+    const _PERCENT = 'percent';
     const _PHONE = 'phone';
     const _PHONE_SQUARE = 'phone-square';
     const _PHOTO = 'photo';
@@ -423,6 +546,7 @@ class FA extends FontAwesome
     const _PIE_CHART = 'pie-chart';
     const _PIED_PIPER = 'pied-piper';
     const _PIED_PIPER_ALT = 'pied-piper-alt';
+    const _PIED_PIPER_PP = 'pied-piper-pp';
     const _PINTEREST = 'pinterest';
     const _PINTEREST_P = 'pinterest-p';
     const _PINTEREST_SQUARE = 'pinterest-square';
@@ -435,28 +559,36 @@ class FA extends FontAwesome
     const _PLUS_CIRCLE = 'plus-circle';
     const _PLUS_SQUARE = 'plus-square';
     const _PLUS_SQUARE_O = 'plus-square-o';
+    const _PODCAST = 'podcast';
     const _POWER_OFF = 'power-off';
     const _PRINT = 'print';
+    const _PRODUCT_HUNT = 'product-hunt';
     const _PUZZLE_PIECE = 'puzzle-piece';
     const _QQ = 'qq';
     const _QRCODE = 'qrcode';
     const _QUESTION = 'question';
     const _QUESTION_CIRCLE = 'question-circle';
+    const _QUESTION_CIRCLE_O = 'question-circle-o';
+    const _QUORA = 'quora';
     const _QUOTE_LEFT = 'quote-left';
     const _QUOTE_RIGHT = 'quote-right';
     const _RA = 'ra';
     const _RANDOM = 'random';
+    const _RAVELRY = 'ravelry';
     const _REBEL = 'rebel';
     const _RECYCLE = 'recycle';
     const _REDDIT = 'reddit';
+    const _REDDIT_ALIEN = 'reddit-alien';
     const _REDDIT_SQUARE = 'reddit-square';
     const _REFRESH = 'refresh';
+    const _REGISTERED = 'registered';
     const _REMOVE = 'remove';
     const _RENREN = 'renren';
     const _REORDER = 'reorder';
     const _REPEAT = 'repeat';
     const _REPLY = 'reply';
     const _REPLY_ALL = 'reply-all';
+    const _RESISTANCE = 'resistance';
     const _RETWEET = 'retweet';
     const _RMB = 'rmb';
     const _ROAD = 'road';
@@ -469,8 +601,11 @@ class FA extends FontAwesome
     const _RUB = 'rub';
     const _RUBLE = 'ruble';
     const _RUPEE = 'rupee';
+    const _S15 = 's15';
+    const _SAFARI = 'safari';
     const _SAVE = 'save';
     const _SCISSORS = 'scissors';
+    const _SCRIBD = 'scribd';
     const _SEARCH = 'search';
     const _SEARCH_MINUS = 'search-minus';
     const _SEARCH_PLUS = 'search-plus';
@@ -488,10 +623,15 @@ class FA extends FontAwesome
     const _SHIELD = 'shield';
     const _SHIP = 'ship';
     const _SHIRTSINBULK = 'shirtsinbulk';
+    const _SHOPPING_BAG = 'shopping-bag';
+    const _SHOPPING_BASKET = 'shopping-basket';
     const _SHOPPING_CART = 'shopping-cart';
+    const _SHOWER = 'shower';
     const _SIGN_IN = 'sign-in';
+    const _SIGN_LANGUAGE = 'sign-language';
     const _SIGN_OUT = 'sign-out';
     const _SIGNAL = 'signal';
+    const _SIGNING = 'signing';
     const _SIMPLYBUILT = 'simplybuilt';
     const _SITEMAP = 'sitemap';
     const _SKYATLAS = 'skyatlas';
@@ -500,6 +640,10 @@ class FA extends FontAwesome
     const _SLIDERS = 'sliders';
     const _SLIDESHARE = 'slideshare';
     const _SMILE_O = 'smile-o';
+    const _SNAPCHAT = 'snapchat';
+    const _SNAPCHAT_GHOST = 'snapchat-ghost';
+    const _SNAPCHAT_SQUARE = 'snapchat-square';
+    const _SNOWFLAKE_O = 'snowflake-o';
     const _SOCCER_BALL_O = 'soccer-ball-o';
     const _SORT = 'sort';
     const _SORT_ALPHA_ASC = 'sort-alpha-asc';
@@ -532,7 +676,11 @@ class FA extends FontAwesome
     const _STEP_BACKWARD = 'step-backward';
     const _STEP_FORWARD = 'step-forward';
     const _STETHOSCOPE = 'stethoscope';
+    const _STICKY_NOTE = 'sticky-note';
+    const _STICKY_NOTE_O = 'sticky-note-o';
     const _STOP = 'stop';
+    const _STOP_CIRCLE = 'stop-circle';
+    const _STOP_CIRCLE_O = 'stop-circle-o';
     const _STREET_VIEW = 'street-view';
     const _STRIKETHROUGH = 'strikethrough';
     const _STUMBLEUPON = 'stumbleupon';
@@ -541,6 +689,7 @@ class FA extends FontAwesome
     const _SUBWAY = 'subway';
     const _SUITCASE = 'suitcase';
     const _SUN_O = 'sun-o';
+    const _SUPERPOWERS = 'superpowers';
     const _SUPERSCRIPT = 'superscript';
     const _SUPPORT = 'support';
     const _TABLE = 'table';
@@ -550,6 +699,8 @@ class FA extends FontAwesome
     const _TAGS = 'tags';
     const _TASKS = 'tasks';
     const _TAXI = 'taxi';
+    const _TELEGRAM = 'telegram';
+    const _TELEVISION = 'television';
     const _TENCENT_WEIBO = 'tencent-weibo';
     const _TERMINAL = 'terminal';
     const _TEXT_HEIGHT = 'text-height';
@@ -557,6 +708,18 @@ class FA extends FontAwesome
     const _TH = 'th';
     const _TH_LARGE = 'th-large';
     const _TH_LIST = 'th-list';
+    const _THEMEISLE = 'themeisle';
+    const _THERMOMETER = 'thermometer';
+    const _THERMOMETER_0 = 'thermometer-0';
+    const _THERMOMETER_1 = 'thermometer-1';
+    const _THERMOMETER_2 = 'thermometer-2';
+    const _THERMOMETER_3 = 'thermometer-3';
+    const _THERMOMETER_4 = 'thermometer-4';
+    const _THERMOMETER_EMPTY = 'thermometer-empty';
+    const _THERMOMETER_FULL = 'thermometer-full';
+    const _THERMOMETER_HALF = 'thermometer-half';
+    const _THERMOMETER_QUARTER = 'thermometer-quarter';
+    const _THERMOMETER_THREE_QUARTERS = 'thermometer-three-quarters';
     const _THUMB_TACK = 'thumb-tack';
     const _THUMBS_DOWN = 'thumbs-down';
     const _THUMBS_O_DOWN = 'thumbs-o-down';
@@ -566,6 +729,8 @@ class FA extends FontAwesome
     const _TIMES = 'times';
     const _TIMES_CIRCLE = 'times-circle';
     const _TIMES_CIRCLE_O = 'times-circle-o';
+    const _TIMES_RECTANGLE = 'times-rectangle';
+    const _TIMES_RECTANGLE_O = 'times-rectangle-o';
     const _TINT = 'tint';
     const _TOGGLE_DOWN = 'toggle-down';
     const _TOGGLE_LEFT = 'toggle-left';
@@ -573,6 +738,7 @@ class FA extends FontAwesome
     const _TOGGLE_ON = 'toggle-on';
     const _TOGGLE_RIGHT = 'toggle-right';
     const _TOGGLE_UP = 'toggle-up';
+    const _TRADEMARK = 'trademark';
     const _TRAIN = 'train';
     const _TRANSGENDER = 'transgender';
     const _TRANSGENDER_ALT = 'transgender-alt';
@@ -580,6 +746,7 @@ class FA extends FontAwesome
     const _TRASH_O = 'trash-o';
     const _TREE = 'tree';
     const _TRELLO = 'trello';
+    const _TRIPADVISOR = 'tripadvisor';
     const _TROPHY = 'trophy';
     const _TRUCK = 'truck';
     const _TRY = 'try';
@@ -587,33 +754,45 @@ class FA extends FontAwesome
     const _TUMBLR = 'tumblr';
     const _TUMBLR_SQUARE = 'tumblr-square';
     const _TURKISH_LIRA = 'turkish-lira';
+    const _TV = 'tv';
     const _TWITCH = 'twitch';
     const _TWITTER = 'twitter';
     const _TWITTER_SQUARE = 'twitter-square';
     const _UMBRELLA = 'umbrella';
     const _UNDERLINE = 'underline';
     const _UNDO = 'undo';
+    const _UNIVERSAL_ACCESS = 'universal-access';
     const _UNIVERSITY = 'university';
     const _UNLINK = 'unlink';
     const _UNLOCK = 'unlock';
     const _UNLOCK_ALT = 'unlock-alt';
     const _UNSORTED = 'unsorted';
     const _UPLOAD = 'upload';
+    const _USB = 'usb';
     const _USD = 'usd';
     const _USER = 'user';
+    const _USER_CIRCLE = 'user-circle';
+    const _USER_CIRCLE_O = 'user-circle-o';
     const _USER_MD = 'user-md';
+    const _USER_O = 'user-o';
     const _USER_PLUS = 'user-plus';
     const _USER_SECRET = 'user-secret';
     const _USER_TIMES = 'user-times';
     const _USERS = 'users';
+    const _VCARD = 'vcard';
+    const _VCARD_O = 'vcard-o';
     const _VENUS = 'venus';
     const _VENUS_DOUBLE = 'venus-double';
     const _VENUS_MARS = 'venus-mars';
     const _VIACOIN = 'viacoin';
+    const _VIADEO = 'viadeo';
+    const _VIADEO_SQUARE = 'viadeo-square';
     const _VIDEO_CAMERA = 'video-camera';
+    const _VIMEO = 'vimeo';
     const _VIMEO_SQUARE = 'vimeo-square';
     const _VINE = 'vine';
     const _VK = 'vk';
+    const _VOLUME_CONTROL_PHONE = 'volume-control-phone';
     const _VOLUME_DOWN = 'volume-down';
     const _VOLUME_OFF = 'volume-off';
     const _VOLUME_UP = 'volume-up';
@@ -623,16 +802,31 @@ class FA extends FontAwesome
     const _WEIXIN = 'weixin';
     const _WHATSAPP = 'whatsapp';
     const _WHEELCHAIR = 'wheelchair';
+    const _WHEELCHAIR_ALT = 'wheelchair-alt';
     const _WIFI = 'wifi';
+    const _WIKIPEDIA_W = 'wikipedia-w';
+    const _WINDOW_CLOSE = 'window-close';
+    const _WINDOW_CLOSE_O = 'window-close-o';
+    const _WINDOW_MAXIMIZE = 'window-maximize';
+    const _WINDOW_MINIMIZE = 'window-minimize';
+    const _WINDOW_RESTORE = 'window-restore';
     const _WINDOWS = 'windows';
     const _WON = 'won';
     const _WORDPRESS = 'wordpress';
+    const _WPBEGINNER = 'wpbeginner';
+    const _WPEXPLORER = 'wpexplorer';
+    const _WPFORMS = 'wpforms';
     const _WRENCH = 'wrench';
     const _XING = 'xing';
     const _XING_SQUARE = 'xing-square';
+    const _Y_COMBINATOR = 'y-combinator';
+    const _Y_COMBINATOR_SQUARE = 'y-combinator-square';
     const _YAHOO = 'yahoo';
+    const _YC = 'yc';
+    const _YC_SQUARE = 'yc-square';
     const _YELP = 'yelp';
     const _YEN = 'yen';
+    const _YOAST = 'yoast';
     const _YOUTUBE = 'youtube';
     const _YOUTUBE_PLAY = 'youtube-play';
     const _YOUTUBE_SQUARE = 'youtube-square';

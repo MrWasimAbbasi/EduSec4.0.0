@@ -11,7 +11,7 @@
 /**
  * Buffers input and output to a resource.
  *
- * @author     Chris Corbyn
+ * @author Chris Corbyn
  */
 interface Swift_Transport_IoBuffer extends Swift_InputByteStream, Swift_OutputByteStream
 {
@@ -25,8 +25,6 @@ interface Swift_Transport_IoBuffer extends Swift_InputByteStream, Swift_OutputBy
      * Perform any initialization needed, using the given $params.
      *
      * Parameters will vary depending upon the type of IoBuffer used.
-     *
-     * @param array $params
      */
     public function initialize(array $params);
 
@@ -59,7 +57,7 @@ interface Swift_Transport_IoBuffer extends Swift_InputByteStream, Swift_OutputBy
      * The $sequence number comes from any writes and may or may not be used
      * depending upon the implementation.
      *
-     * @param int     $sequence of last write to scan from
+     * @param int $sequence of last write to scan from
      *
      * @return string
      */

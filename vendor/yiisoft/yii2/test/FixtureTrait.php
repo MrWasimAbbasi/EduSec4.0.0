@@ -19,6 +19,8 @@ use yii\base\InvalidConfigException;
  * Also, if the fixture is an instance of [[ActiveFixture]], you will be able to access AR models
  * through the syntax `$this->fixtureName('model name')`.
  *
+ * For more details and usage information on FixtureTrait, see the [guide article on fixtures](guide:test-fixtures).
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
@@ -35,17 +37,18 @@ trait FixtureTrait
 
     /**
      * Declares the fixtures that are needed by the current test case.
+     *
      * The return value of this method must be an array of fixture configurations. For example,
      *
      * ```php
      * [
      *     // anonymous fixture
-     *     PostFixture::className(),
+     *     PostFixture::class,
      *     // "users" fixture
-     *     'users' => UserFixture::className(),
+     *     'users' => UserFixture::class,
      *     // "cache" fixture with configuration
      *     'cache' => [
-     *          'class' => CacheFixture::className(),
+     *          'class' => CacheFixture::class,
      *          'host' => 'xxx',
      *     ],
      * ]
@@ -123,6 +126,16 @@ trait FixtureTrait
     }
 
     /**
+     * Initialize the fixtures.
+     * @since 2.0.12
+     */
+    public function initFixtures()
+    {
+        $this->unloadFixtures();
+        $this->loadFixtures();
+    }
+
+    /**
      * Returns the fixture objects as specified in [[globalFixtures()]] and [[fixtures()]].
      * @return Fixture[] the loaded fixtures for the current test case
      */
@@ -152,12 +165,11 @@ trait FixtureTrait
 
     /**
      * Creates the specified fixture instances.
-     * All dependent fixtures will also be created.
+     * All dependent fixtures will also be created. Duplicate fixtures and circular dependencies will only be created once.
      * @param array $fixtures the fixtures to be created. You may provide fixture names or fixture configurations.
      * If this parameter is not provided, the fixtures specified in [[globalFixtures()]] and [[fixtures()]] will be created.
      * @return Fixture[] the created fixture instances
-     * @throws InvalidConfigException if fixtures are not properly configured or if a circular dependency among
-     * the fixtures is detected.
+     * @throws InvalidConfigException if fixtures are not properly configured
      */
     protected function createFixtures(array $fixtures)
     {
@@ -168,7 +180,7 @@ trait FixtureTrait
             if (!is_array($fixture)) {
                 $class = ltrim($fixture, '\\');
                 $fixtures[$name] = ['class' => $class];
-                $aliases[$class] = is_integer($name) ? $class : $name;
+                $aliases[$class] = is_int($name) ? $class : $name;
             } elseif (isset($fixture['class'])) {
                 $class = ltrim($fixture['class'], '\\');
                 $config[$class] = $fixture;
@@ -197,9 +209,8 @@ trait FixtureTrait
                         // need to use the configuration provided in test case
                         $stack[] = isset($config[$dep]) ? $config[$dep] : ['class' => $dep];
                     }
-                } elseif ($instances[$name] === false) {
-                    throw new InvalidConfigException("A circular dependency is detected for fixture '$class'.");
                 }
+                // if the fixture is already loaded (ie. a circular dependency or if two fixtures depend on the same fixture) just skip it.
             }
         }
 

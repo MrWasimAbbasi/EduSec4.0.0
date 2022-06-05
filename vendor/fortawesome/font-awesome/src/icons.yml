@@ -70,6 +70,7 @@ icons:
       - night
       - rating
       - score
+      - favorite
     categories:
       - Web Application Icons
 
@@ -83,6 +84,7 @@ icons:
       - night
       - rating
       - score
+      - favorite
     categories:
       - Web Application Icons
 
@@ -115,6 +117,7 @@ icons:
       - blocks
       - squares
       - boxes
+      - grid
     categories:
       - Text Editor Icons
 
@@ -126,6 +129,7 @@ icons:
       - blocks
       - squares
       - boxes
+      - grid
     categories:
       - Text Editor Icons
 
@@ -155,6 +159,8 @@ icons:
       - agree
       - accept
       - confirm
+      - tick
+      - ok
     categories:
       - Web Application Icons
 
@@ -169,6 +175,7 @@ icons:
       - close
       - exit
       - x
+      - cross
     categories:
       - Web Application Icons
 
@@ -210,6 +217,9 @@ icons:
     id:         signal
     unicode:    f012
     created:    1.0
+    filter:
+      - graph
+      - bars
     categories:
       - Web Application Icons
 
@@ -296,7 +306,7 @@ icons:
     unicode:    f01a
     created:    1.0
     filter:
-        - download
+      - download
     categories:
       - Directional Icons
 
@@ -340,6 +350,7 @@ icons:
     created:    1.0
     filter:
       - reload
+      - sync
     categories:
       - Web Application Icons
       - Spinner Icons
@@ -366,6 +377,7 @@ icons:
     filter:
       - protect
       - admin
+      - security
     categories:
       - Web Application Icons
 
@@ -388,6 +400,7 @@ icons:
       - sound
       - listen
       - music
+      - audio
     categories:
       - Web Application Icons
 
@@ -396,6 +409,7 @@ icons:
     unicode:    f026
     created:    1.0
     filter:
+      - audio
       - mute
       - sound
       - music
@@ -407,6 +421,7 @@ icons:
     unicode:    f027
     created:    1.0
     filter:
+      - audio
       - lower
       - quieter
       - sound
@@ -419,6 +434,7 @@ icons:
     unicode:    f028
     created:    1.0
     filter:
+      - audio
       - higher
       - louder
       - sound
@@ -672,6 +688,9 @@ icons:
     created:    1.0
     filter:
       - raindrop
+      - waterdrop
+      - drop
+      - droplet
     categories:
       - Web Application Icons
 
@@ -695,6 +714,7 @@ icons:
     filter:
       - social
       - send
+      - arrow
     categories:
       - Web Application Icons
 
@@ -708,6 +728,7 @@ icons:
       - agree
       - accept
       - confirm
+      - ok
     categories:
       - Web Application Icons
       - Form Control Icons
@@ -899,6 +920,7 @@ icons:
       - agree
       - accept
       - confirm
+      - ok
     categories:
       - Web Application Icons
 
@@ -956,6 +978,7 @@ icons:
       - agree
       - accept
       - confirm
+      - ok
     categories:
       - Web Application Icons
 
@@ -963,15 +986,15 @@ icons:
     id:         ban
     unicode:    f05e
     created:    1.0
+    filter:
       - delete
       - remove
       - trash
       - hide
       - block
       - stop
-    filter:
-      - block
       - abort
+      - cancel
     categories:
       - Web Application Icons
 
@@ -1008,7 +1031,7 @@ icons:
     unicode:    f063
     created:    1.0
     filter:
-        - download
+      - download
     categories:
       - Directional Icons
 
@@ -1037,7 +1060,9 @@ icons:
     unicode:    f066
     created:    1.0
     filter:
+      - collapse
       - combine
+      - contract
       - merge
       - smaller
     categories:
@@ -1108,6 +1133,7 @@ icons:
     filter:
       - eco
       - nature
+      - plant
     categories:
       - Web Application Icons
 
@@ -1187,6 +1213,7 @@ icons:
       - date
       - time
       - when
+      - event
     categories:
       - Web Application Icons
 
@@ -1196,8 +1223,10 @@ icons:
     created:    1.0
     filter:
       - sort
+      - shuffle
     categories:
       - Web Application Icons
+      - Video Player Icons
 
   - name:       comment
     id:         comment
@@ -1207,6 +1236,13 @@ icons:
       - speech
       - notification
       - note
+      - chat
+      - bubble
+      - feedback
+      - message
+      - texting
+      - sms
+      - conversation
     categories:
       - Web Application Icons
 
@@ -1273,7 +1309,7 @@ icons:
     unicode:    f07d
     created:    1.0
     filter:
-        - resize
+      - resize
     categories:
       - Web Application Icons
       - Directional Icons
@@ -1283,7 +1319,7 @@ icons:
     unicode:    f07e
     created:    1.0
     filter:
-        - resize
+      - resize
     categories:
       - Web Application Icons
       - Directional Icons
@@ -1297,6 +1333,7 @@ icons:
       - bar-chart-o
     filter:
       - graph
+      - analytics
     categories:
       - Web Application Icons
       - Chart Icons
@@ -1357,9 +1394,16 @@ icons:
     unicode:    f086
     created:    1.0
     filter:
-      - conversation
+      - speech
       - notification
-      - notes
+      - note
+      - chat
+      - bubble
+      - feedback
+      - message
+      - texting
+      - sms
+      - conversation
     categories:
       - Web Application Icons
 
@@ -1372,8 +1416,10 @@ icons:
       - approve
       - favorite
       - agree
+      - hand
     categories:
       - Web Application Icons
+      - Hand Icons
 
   - name:       Thumbs Down Outlined
     id:         thumbs-o-down
@@ -1383,8 +1429,10 @@ icons:
       - dislike
       - disapprove
       - disagree
+      - hand
     categories:
       - Web Application Icons
+      - Hand Icons
 
   - name:       star-half
     id:         star-half
@@ -1460,6 +1508,8 @@ icons:
     filter:
       - enter
       - join
+      - log in
+      - login
       - sign up
       - sign in
       - signin
@@ -1475,6 +1525,7 @@ icons:
     filter:
       - award
       - achievement
+      - cup
       - winner
       - game
     categories:
@@ -1484,6 +1535,7 @@ icons:
     id:         github-square
     unicode:    f092
     created:    1.0
+    url:        github.com/logos
     filter:
       - octocat
     categories:
@@ -1502,6 +1554,8 @@ icons:
     id:         lemon-o
     unicode:    f094
     created:    1.0
+    filter:
+      - food
     categories:
       - Web Application Icons
 
@@ -1510,10 +1564,12 @@ icons:
     unicode:    f095
     created:    2.0
     filter:
-       - call
-       - voice
-       - number
-       - support
+      - call
+      - voice
+      - number
+      - support
+      - earphone
+      - telephone
     categories:
       - Web Application Icons
 
@@ -1544,10 +1600,11 @@ icons:
     unicode:    f098
     created:    2.0
     filter:
-       - call
-       - voice
-       - number
-       - support
+      - call
+      - voice
+      - number
+      - support
+      - telephone
     categories:
       - Web Application Icons
 
@@ -1576,6 +1633,7 @@ icons:
     id:         github
     unicode:    f09b
     created:    2.0
+    url:        github.com/logos
     filter:
       - octocat
     categories:
@@ -1589,6 +1647,7 @@ icons:
       - protect
       - admin
       - password
+      - lock
     categories:
       - Web Application Icons
 
@@ -1612,8 +1671,9 @@ icons:
     unicode:    f09e
     created:    2.0
     filter:
-      - feed
       - blog
+    aliases:
+      - feed
     categories:
       - Web Application Icons
 
@@ -1639,6 +1699,7 @@ icons:
       - share
       - broadcast
       - louder
+      - megaphone
     categories:
       - Web Application Icons
 
@@ -1672,8 +1733,10 @@ icons:
       - right
       - next
       - forward
+      - finger
     categories:
       - Directional Icons
+      - Hand Icons
 
   - name:       Hand Outlined Left
     id:         hand-o-left
@@ -1684,8 +1747,10 @@ icons:
       - left
       - previous
       - back
+      - finger
     categories:
       - Directional Icons
+      - Hand Icons
 
   - name:       Hand Outlined Up
     id:         hand-o-up
@@ -1693,8 +1758,10 @@ icons:
     created:    2.0
     filter:
       - point
+      - finger
     categories:
       - Directional Icons
+      - Hand Icons
 
   - name:       Hand Outlined Down
     id:         hand-o-down
@@ -1702,8 +1769,10 @@ icons:
     created:    2.0
     filter:
       - point
+      - finger
     categories:
       - Directional Icons
+      - Hand Icons
 
   - name:       Arrow Circle Left
     id:         arrow-circle-left
@@ -1737,7 +1806,7 @@ icons:
     unicode:    f0ab
     created:    2.0
     filter:
-        - download
+      - download
     categories:
       - Directional Icons
 
@@ -1771,6 +1840,7 @@ icons:
       - settings
       - fix
       - update
+      - spanner
     categories:
       - Web Application Icons
 
@@ -1779,11 +1849,11 @@ icons:
     unicode:    f0ae
     created:    2.0
     filter:
-       - progress
-       - loading
-       - downloading
-       - downloads
-       - settings
+      - progress
+      - loading
+      - downloading
+      - downloads
+      - settings
     categories:
       - Web Application Icons
 
@@ -1818,10 +1888,12 @@ icons:
     filter:
       - expand
       - enlarge
+      - fullscreen
       - bigger
       - move
       - reorder
       - resize
+      - arrow
     categories:
       - Video Player Icons
       - Directional Icons
@@ -1887,6 +1959,8 @@ icons:
     created:    2.0
     filter:
       - duplicate
+      - clone
+      - copy
     aliases:
       - copy
     categories:
@@ -1939,6 +2013,7 @@ icons:
       - checklist
       - todo
       - list
+      - hamburger
     categories:
       - Web Application Icons
 
@@ -2072,6 +2147,8 @@ icons:
       - more
       - dropdown
       - menu
+      - triangle down
+      - arrow
     categories:
       - Directional Icons
 
@@ -2079,6 +2156,9 @@ icons:
     id:         caret-up
     unicode:    f0d8
     created:    2.0
+    filter:
+      - triangle up
+      - arrow
     categories:
       - Directional Icons
 
@@ -2089,6 +2169,8 @@ icons:
     filter:
       - previous
       - back
+      - triangle left
+      - arrow
     categories:
       - Directional Icons
 
@@ -2099,6 +2181,8 @@ icons:
     filter:
       - next
       - forward
+      - triangle right
+      - arrow
     categories:
       - Directional Icons
 
@@ -2126,11 +2210,12 @@ icons:
   - name:       Sort Descending
     id:         sort-desc
     unicode:    f0dd
+    created:    2.0
     filter:
       - dropdown
       - more
       - menu
-    created:    2.0
+      - arrow
     aliases:
       - sort-down
     categories:
@@ -2142,6 +2227,8 @@ icons:
     created:    2.0
     aliases:
       - sort-up
+    filter:
+      - arrow
     categories:
       - Web Application Icons
 
@@ -2150,6 +2237,7 @@ icons:
     id:         envelope
     unicode:    f0e0
     created:    2.0
+    filter:
       - email
       - e-mail
       - letter
@@ -2208,8 +2296,16 @@ icons:
     unicode:    f0e5
     created:    2.0
     filter:
+      - speech
       - notification
       - note
+      - chat
+      - bubble
+      - feedback
+      - message
+      - texting
+      - sms
+      - conversation
     categories:
       - Web Application Icons
 
@@ -2218,9 +2314,16 @@ icons:
     unicode:    f0e6
     created:    2.0
     filter:
-      - conversation
+      - speech
       - notification
-      - notes
+      - note
+      - chat
+      - bubble
+      - feedback
+      - message
+      - texting
+      - sms
+      - conversation
     categories:
       - Web Application Icons
 
@@ -2279,8 +2382,13 @@ icons:
     id:         exchange
     unicode:    f0ec
     created:    3.0
+    filter:
+      - transfer
+      - arrows
+      - arrow
     categories:
       - Web Application Icons
+      - Directional Icons
 
   - name:       Cloud Download
     id:         cloud-download
@@ -2363,12 +2471,12 @@ icons:
     unicode:    f0f5
     created:    3.0
     filter:
-       - food
-       - restaurant
-       - spoon
-       - knife
-       - dinner
-       - eat
+      - food
+      - restaurant
+      - spoon
+      - knife
+      - dinner
+      - eat
     categories:
       - Web Application Icons
 
@@ -2394,6 +2502,7 @@ icons:
       - business
       - apartment
       - office
+      - company
     categories:
       - Web Application Icons
 
@@ -2411,6 +2520,7 @@ icons:
     unicode:    f0f9
     created:    3.0
     filter:
+      - vehicle
       - support
       - help
     categories:
@@ -2426,6 +2536,7 @@ icons:
       - firstaid
       - help
       - support
+      - health
     categories:
       - Medical Icons
 
@@ -2492,6 +2603,7 @@ icons:
       - quote
       - previous
       - back
+      - arrows
     categories:
       - Directional Icons
 
@@ -2504,6 +2616,7 @@ icons:
       - quote
       - next
       - forward
+      - arrows
     categories:
       - Directional Icons
 
@@ -2511,6 +2624,8 @@ icons:
     id:         angle-double-up
     unicode:    f102
     created:    3.0
+    filter:
+      - arrows
     categories:
       - Directional Icons
 
@@ -2518,6 +2633,8 @@ icons:
     id:         angle-double-down
     unicode:    f103
     created:    3.0
+    filter:
+      - arrows
     categories:
       - Directional Icons
 
@@ -2528,6 +2645,7 @@ icons:
     filter:
       - previous
       - back
+      - arrow
     categories:
       - Directional Icons
 
@@ -2538,6 +2656,7 @@ icons:
     filter:
       - next
       - forward
+      - arrow
     categories:
       - Directional Icons
 
@@ -2545,6 +2664,8 @@ icons:
     id:         angle-up
     unicode:    f106
     created:    3.0
+    filter:
+      - arrow
     categories:
       - Directional Icons
 
@@ -2552,6 +2673,8 @@ icons:
     id:         angle-down
     unicode:    f107
     created:    3.0
+    filter:
+      - arrow
     categories:
       - Directional Icons
 
@@ -2601,6 +2724,7 @@ icons:
       - call
       - iphone
       - number
+      - telephone
     aliases:
       - mobile-phone
     categories:
@@ -2664,6 +2788,7 @@ icons:
     id:         github-alt
     unicode:    f113
     created:    3.0
+    url:        github.com/logos
     filter:
       - octocat
     categories:
@@ -2688,6 +2813,7 @@ icons:
     unicode:    f118
     created:    3.1
     filter:
+      - face
       - emoticon
       - happy
       - approve
@@ -2701,6 +2827,7 @@ icons:
     unicode:    f119
     created:    3.1
     filter:
+      - face
       - emoticon
       - sad
       - disapprove
@@ -2713,6 +2840,7 @@ icons:
     unicode:    f11a
     created:    3.1
     filter:
+      - face
       - emoticon
       - rating
       - neutral
@@ -2911,6 +3039,9 @@ icons:
     id:         eraser
     unicode:    f12d
     created:    3.1
+    filter:
+      - remove
+      - delete
     categories:
       - Text Editor Icons
       - Web Application Icons
@@ -2957,6 +3088,7 @@ icons:
     filter:
       - award
       - achievement
+      - security
       - winner
     categories:
       - Web Application Icons
@@ -2969,6 +3101,7 @@ icons:
       - date
       - time
       - when
+      - event
     categories:
       - Web Application Icons
 
@@ -3003,6 +3136,7 @@ icons:
     filter:
       - previous
       - back
+      - arrow
     categories:
       - Directional Icons
 
@@ -3013,6 +3147,7 @@ icons:
     filter:
       - next
       - forward
+      - arrow
     categories:
       - Directional Icons
 
@@ -3020,6 +3155,8 @@ icons:
     id:         chevron-circle-up
     unicode:    f139
     created:    3.1
+    filter:
+      - arrow
     categories:
       - Directional Icons
 
@@ -3031,6 +3168,7 @@ icons:
       - more
       - dropdown
       - menu
+      - arrow
     categories:
       - Directional Icons
 
@@ -3070,6 +3208,7 @@ icons:
       - protect
       - admin
       - password
+      - lock
     categories:
       - Web Application Icons
 
@@ -3169,6 +3308,8 @@ icons:
     id:         level-up
     unicode:    f148
     created:    3.1
+    filter:
+      - arrow
     categories:
       - Web Application Icons
 
@@ -3176,6 +3317,8 @@ icons:
     id:         level-down
     unicode:    f149
     created:    3.1
+    filter:
+      - arrow
     categories:
       - Web Application Icons
 
@@ -3190,6 +3333,7 @@ icons:
       - agree
       - accept
       - confirm
+      - ok
     categories:
       - Web Application Icons
       - Form Control Icons
@@ -3432,8 +3576,10 @@ icons:
       - favorite
       - approve
       - agree
+      - hand
     categories:
       - Web Application Icons
+      - Hand Icons
 
   - name:       thumbs-down
     id:         thumbs-down
@@ -3443,8 +3589,10 @@ icons:
       - dislike
       - disapprove
       - disagree
+      - hand
     categories:
       - Web Application Icons
+      - Hand Icons
 
   - name:       YouTube Square
     id:         youtube-square
@@ -3508,7 +3656,7 @@ icons:
   - name:       Instagram
     id:         instagram
     unicode:    f16d
-    created:    3.2
+    created:    4.6
     categories:
       - Brand Icons
 
@@ -3531,7 +3679,7 @@ icons:
     unicode:    f171
     created:    3.2
     filter:
-        - git
+      - git
     categories:
       - Brand Icons
 
@@ -3540,7 +3688,7 @@ icons:
     unicode:    f172
     created:    3.2
     filter:
-        - git
+      - git
     categories:
       - Brand Icons
 
@@ -3595,6 +3743,7 @@ icons:
     created:    3.2
     filter:
       - osx
+      - food
     categories:
       - Brand Icons
 
@@ -3602,6 +3751,7 @@ icons:
     id:         windows
     unicode:    f17a
     created:    3.2
+    filter:
       - microsoft
     categories:
       - Brand Icons
@@ -3610,6 +3760,8 @@ icons:
     id:         android
     unicode:    f17b
     created:    3.2
+    filter:
+      - robot
     categories:
       - Brand Icons
 
@@ -3707,9 +3859,9 @@ icons:
     unicode:    f186
     created:    3.2
     filter:
-       - night
-       - darker
-       - contrast
+      - night
+      - darker
+      - contrast
     categories:
       - Web Application Icons
 
@@ -3729,6 +3881,7 @@ icons:
     created:    3.2
     filter:
       - report
+      - insect
     categories:
       - Web Application Icons
 
@@ -3828,12 +3981,11 @@ icons:
     filter:
       - handicap
       - person
-      - accessibility
-      - accessibile
     categories:
       - Web Application Icons
       - Medical Icons
       - Transportation Icons
+      - Accessibility Icons
 
   - name:       Vimeo Square
     id:         vimeo-square
@@ -3877,6 +4029,10 @@ icons:
     id:         slack
     unicode:    f198
     created:    4.1
+    filter:
+      - hashtag
+      - anchor
+      - hash
     categories:
       - Brand Icons
 
@@ -3887,7 +4043,7 @@ icons:
     categories:
       - Web Application Icons
 
-  - name:       Wordpress Logo
+  - name:       WordPress Logo
     id:         wordpress
     unicode:    f19a
     created:    4.1
@@ -3917,6 +4073,10 @@ icons:
     created:    4.1
     aliases:
       - mortar-board
+    filter:
+      - learning
+      - school
+      - student
     categories:
       - Web Application Icons
 
@@ -3977,8 +4137,8 @@ icons:
     categories:
       - Brand Icons
 
-  - name:       Pied Piper Logo
-    id:         pied-piper
+  - name:       Pied Piper PP Logo (Old)
+    id:         pied-piper-pp
     unicode:    f1a7
     created:    4.1
     categories:
@@ -4023,6 +4183,12 @@ icons:
     id:         building
     unicode:    f1ad
     created:    4.1
+    filter:
+      - work
+      - business
+      - apartment
+      - office
+      - company
     categories:
       - Web Application Icons
 
@@ -4038,6 +4204,8 @@ icons:
     id:         paw
     unicode:    f1b0
     created:    4.1
+    filter:
+      - pet
     categories:
       - Web Application Icons
 
@@ -4285,6 +4453,7 @@ icons:
     created:    4.1
     aliases:
       - ra
+      - resistance
     categories:
       - Brand Icons
 
@@ -4315,6 +4484,9 @@ icons:
     id:         hacker-news
     unicode:    f1d4
     created:    4.1
+    aliases:
+      - y-combinator-square
+      - yc-square
     categories:
       - Brand Icons
 
@@ -4347,7 +4519,6 @@ icons:
     created:    4.1
     aliases:
       - send
-    filter:
     categories:
       - Web Application Icons
 
@@ -4371,16 +4542,15 @@ icons:
     id:         circle-thin
     unicode:    f1db
     created:    4.1
-    aliases:
-      - genderless
     categories:
       - Web Application Icons
-      - Gender Icons
 
   - name:       header
     id:         header
     unicode:    f1dc
     created:    4.1
+    filter:
+      - heading
     categories:
       - Text Editor Icons
 
@@ -4395,6 +4565,8 @@ icons:
     id:         sliders
     unicode:    f1de
     created:    4.1
+    filter:
+      - settings
     categories:
       - Web Application Icons
 
@@ -4437,6 +4609,7 @@ icons:
     created:    4.2
     categories:
       - Web Application Icons
+      - Accessibility Icons
 
   - name:       Binoculars
     id:         binoculars
@@ -4449,6 +4622,9 @@ icons:
     id:         plug
     unicode:    f1e6
     created:    4.2
+    filter:
+      - power
+      - connect
     categories:
       - Web Application Icons
 
@@ -4477,6 +4653,8 @@ icons:
     id:         newspaper-o
     unicode:    f1ea
     created:    4.2
+    filter:
+      - press
     categories:
       - Web Application Icons
 
@@ -4502,7 +4680,7 @@ icons:
       - Brand Icons
       - Payment Icons
 
-  - name:       Goole Wallet
+  - name:       Google Wallet
     id:         google-wallet
     unicode:    f1ee
     created:    4.2
@@ -4539,6 +4717,8 @@ icons:
     id:         cc-amex
     unicode:    f1f3
     created:    4.2
+    filter:
+      - amex
     categories:
       - Brand Icons
       - Payment Icons
@@ -4577,6 +4757,11 @@ icons:
     id:         trash
     unicode:    f1f8
     created:    4.2
+    filter:
+      - garbage
+      - delete
+      - remove
+      - hide
     categories:
       - Web Application Icons
 
@@ -4619,15 +4804,20 @@ icons:
     id:         area-chart
     unicode:    f1fe
     created:    4.2
+    filter:
+      - graph
+      - analytics
     categories:
       - Web Application Icons
       - Chart Icons
-
 
   - name:       Pie Chart
     id:         pie-chart
     unicode:    f200
     created:    4.2
+    filter:
+      - graph
+      - analytics
     categories:
       - Web Application Icons
       - Chart Icons
@@ -4636,6 +4826,9 @@ icons:
     id:         line-chart
     unicode:    f201
     created:    4.2
+    filter:
+      - graph
+      - analytics
     categories:
       - Web Application Icons
       - Chart Icons
@@ -4710,6 +4903,7 @@ icons:
     created:    4.2
     categories:
       - Web Application Icons
+      - Accessibility Icons
 
   - name:       Shekel (ILS)
     id:         ils
@@ -4850,6 +5044,7 @@ icons:
       - whisper
       - spy
       - incognito
+      - privacy
     categories:
       - Web Application Icons
 
@@ -4915,6 +5110,8 @@ icons:
     id:         transgender
     unicode:    f224
     created:    4.3
+    aliases:
+      - intersex
     categories:
       - Gender Icons
 
@@ -4974,6 +5171,13 @@ icons:
     categories:
       - Gender Icons
 
+  - name:       Genderless
+    id:         genderless
+    unicode:    f22d
+    created:    4.4
+    categories:
+      - Gender Icons
+
 
   - name:       Facebook Official
     id:         facebook-official
@@ -5007,6 +5211,9 @@ icons:
     id:         user-plus
     unicode:    f234
     created:    4.3
+    filter:
+      - sign up
+      - signup
     categories:
       - Web Application Icons
 
@@ -5054,5 +5261,1280 @@ icons:
     id:         medium
     unicode:    f23a
     created:    4.3
+    categories:
+      - Brand Icons
+
+  - name:       Y Combinator
+    id:         y-combinator
+    unicode:    f23b
+    created:    4.4
+    aliases:
+      - yc
+    categories:
+      - Brand Icons
+
+  - name:       Optin Monster
+    id:         optin-monster
+    unicode:    f23c
+    created:    4.4
+    url:        optinmonster.com
+    categories:
+      - Brand Icons
+
+  - name:       OpenCart
+    id:         opencart
+    unicode:    f23d
+    created:    4.4
+    url:        opencart.com
+    categories:
+      - Brand Icons
+
+  - name:       ExpeditedSSL
+    id:         expeditedssl
+    unicode:    f23e
+    created:    4.4
+    categories:
+      - Brand Icons
+
+
+  - name:       Battery Full
+    id:         battery-full
+    unicode:    f240
+    created:    4.4
+    aliases:
+      - battery-4
+      - battery
+    filter:
+      - power
+    categories:
+      - Web Application Icons
+
+  - name:       Battery 3/4 Full
+    id:         battery-three-quarters
+    unicode:    f241
+    created:    4.4
+    aliases:
+      - battery-3
+    filter:
+      - power
+    categories:
+      - Web Application Icons
+
+  - name:       Battery 1/2 Full
+    id:         battery-half
+    unicode:    f242
+    created:    4.4
+    aliases:
+      - battery-2
+    filter:
+      - power
+    categories:
+      - Web Application Icons
+
+  - name:       Battery 1/4 Full
+    id:         battery-quarter
+    unicode:    f243
+    created:    4.4
+    aliases:
+      - battery-1
+    filter:
+      - power
+    categories:
+      - Web Application Icons
+
+  - name:       Battery Empty
+    id:         battery-empty
+    unicode:    f244
+    created:    4.4
+    aliases:
+      - battery-0
+    filter:
+      - power
+    categories:
+      - Web Application Icons
+
+  - name:       Mouse Pointer
+    id:         mouse-pointer
+    unicode:    f245
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       I Beam Cursor
+    id:         i-cursor
+    unicode:    f246
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Object Group
+    id:         object-group
+    unicode:    f247
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Object Ungroup
+    id:         object-ungroup
+    unicode:    f248
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Sticky Note
+    id:         sticky-note
+    unicode:    f249
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Sticky Note Outlined
+    id:         sticky-note-o
+    unicode:    f24a
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       JCB Credit Card
+    id:         cc-jcb
+    unicode:    f24b
+    created:    4.4
+    categories:
+      - Brand Icons
+      - Payment Icons
+
+  - name:       Diner's Club Credit Card
+    id:         cc-diners-club
+    unicode:    f24c
+    created:    4.4
+    categories:
+      - Brand Icons
+      - Payment Icons
+
+  - name:       Clone
+    id:         clone
+    unicode:    f24d
+    created:    4.4
+    filter:
+      - copy
+    categories:
+      - Web Application Icons
+
+  - name:       Balance Scale
+    id:         balance-scale
+    unicode:    f24e
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+
+  - name:       Hourglass Outlined
+    id:         hourglass-o
+    unicode:    f250
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Hourglass Start
+    id:         hourglass-start
+    unicode:    f251
+    created:    4.4
+    aliases:
+      - hourglass-1
+    categories:
+      - Web Application Icons
+
+  - name:       Hourglass Half
+    id:         hourglass-half
+    unicode:    f252
+    created:    4.4
+    aliases:
+      - hourglass-2
+    categories:
+      - Web Application Icons
+
+  - name:       Hourglass End
+    id:         hourglass-end
+    unicode:    f253
+    created:    4.4
+    aliases:
+      - hourglass-3
+    categories:
+      - Web Application Icons
+
+  - name:       Hourglass
+    id:         hourglass
+    unicode:    f254
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Rock (Hand)
+    id:         hand-rock-o
+    unicode:    f255
+    created:    4.4
+    aliases:
+      - hand-grab-o
+    categories:
+      - Web Application Icons
+      - Hand Icons
+
+  - name:       Paper (Hand)
+    id:         hand-paper-o
+    unicode:    f256
+    created:    4.4
+    aliases:
+      - hand-stop-o
+    filter:
+      - stop
+    categories:
+      - Web Application Icons
+      - Hand Icons
+
+  - name:       Scissors (Hand)
+    id:         hand-scissors-o
+    unicode:    f257
+    created:    4.4
+    categories:
+      - Web Application Icons
+      - Hand Icons
+
+  - name:       Lizard (Hand)
+    id:         hand-lizard-o
+    unicode:    f258
+    created:    4.4
+    categories:
+      - Web Application Icons
+      - Hand Icons
+
+  - name:       Spock (Hand)
+    id:         hand-spock-o
+    unicode:    f259
+    created:    4.4
+    categories:
+      - Web Application Icons
+      - Hand Icons
+
+  - name:       Hand Pointer
+    id:         hand-pointer-o
+    unicode:    f25a
+    created:    4.4
+    categories:
+      - Web Application Icons
+      - Hand Icons
+
+  - name:       Hand Peace
+    id:         hand-peace-o
+    unicode:    f25b
+    created:    4.4
+    categories:
+      - Web Application Icons
+      - Hand Icons
+
+  - name:       Trademark
+    id:         trademark
+    unicode:    f25c
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Registered Trademark
+    id:         registered
+    unicode:    f25d
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Creative Commons
+    id:         creative-commons
+    unicode:    f25e
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+
+  - name:       GG Currency
+    id:         gg
+    unicode:    f260
+    created:    4.4
+    categories:
+      - Currency Icons
+      - Brand Icons
+
+  - name:       GG Currency Circle
+    id:         gg-circle
+    unicode:    f261
+    created:    4.4
+    categories:
+      - Currency Icons
+      - Brand Icons
+
+  - name:       TripAdvisor
+    id:         tripadvisor
+    unicode:    f262
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Odnoklassniki
+    id:         odnoklassniki
+    unicode:    f263
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Odnoklassniki Square
+    id:         odnoklassniki-square
+    unicode:    f264
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Get Pocket
+    id:         get-pocket
+    unicode:    f265
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Wikipedia W
+    id:         wikipedia-w
+    unicode:    f266
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Safari
+    id:         safari
+    unicode:    f267
+    created:    4.4
+    filter:
+      - browser
+    categories:
+      - Brand Icons
+
+  - name:       Chrome
+    id:         chrome
+    unicode:    f268
+    created:    4.4
+    filter:
+      - browser
+    categories:
+      - Brand Icons
+
+  - name:       Firefox
+    id:         firefox
+    unicode:    f269
+    created:    4.4
+    filter:
+      - browser
+    categories:
+      - Brand Icons
+
+  - name:       Opera
+    id:         opera
+    unicode:    f26a
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Internet-explorer
+    id:         internet-explorer
+    unicode:    f26b
+    created:    4.4
+    filter:
+      - browser
+      - ie
+    categories:
+      - Brand Icons
+
+  - name:       Television
+    id:         television
+    unicode:    f26c
+    created:    4.4
+    aliases:
+      - tv
+    filter:
+      - display
+      - computer
+      - monitor
+    categories:
+      - Web Application Icons
+
+  - name:       Contao
+    id:         contao
+    unicode:    f26d
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       500px
+    id:         500px
+    unicode:    f26e
+    created:    4.4
+    categories:
+      - Brand Icons
+
+
+  - name:       Amazon
+    id:         amazon
+    unicode:    f270
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Calendar Plus Outlined
+    id:         calendar-plus-o
+    unicode:    f271
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Calendar Minus Outlined
+    id:         calendar-minus-o
+    unicode:    f272
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Calendar Times Outlined
+    id:         calendar-times-o
+    unicode:    f273
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Calendar Check Outlined
+    id:         calendar-check-o
+    unicode:    f274
+    created:    4.4
+    filter:
+      - ok
+    categories:
+      - Web Application Icons
+
+  - name:       Industry
+    id:         industry
+    unicode:    f275
+    created:    4.4
+    filter:
+      - factory
+    categories:
+      - Web Application Icons
+
+  - name:       Map Pin
+    id:         map-pin
+    unicode:    f276
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Map Signs
+    id:         map-signs
+    unicode:    f277
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Map Outlined
+    id:         map-o
+    unicode:    f278
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Map
+    id:         map
+    unicode:    f279
+    created:    4.4
+    categories:
+      - Web Application Icons
+
+  - name:       Commenting
+    id:         commenting
+    unicode:    f27a
+    created:    4.4
+    filter:
+      - speech
+      - notification
+      - note
+      - chat
+      - bubble
+      - feedback
+      - message
+      - texting
+      - sms
+      - conversation
+    categories:
+      - Web Application Icons
+
+  - name:       Commenting Outlined
+    id:         commenting-o
+    unicode:    f27b
+    created:    4.4
+    filter:
+      - speech
+      - notification
+      - note
+      - chat
+      - bubble
+      - feedback
+      - message
+      - texting
+      - sms
+      - conversation
+    categories:
+      - Web Application Icons
+
+  - name:       Houzz
+    id:         houzz
+    unicode:    f27c
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Vimeo
+    id:         vimeo
+    unicode:    f27d
+    created:    4.4
+    categories:
+      - Brand Icons
+
+  - name:       Font Awesome Black Tie
+    id:         black-tie
+    unicode:    f27e
+    created:    4.4
+    url:        blacktie.io
+    categories:
+      - Brand Icons
+
+
+  - name:       Fonticons
+    id:         fonticons
+    unicode:    f280
+    created:    4.4
+    url:        fonticons.com
+    categories:
+      - Brand Icons
+
+  - name:       reddit Alien
+    id:         reddit-alien
+    unicode:    f281
+    created:    4.5
+    categories:
+      - Brand Icons
+
+  - name:       Edge Browser
+    id:         edge
+    unicode:    f282
+    created:    4.5
+    filter:
+      - browser
+      - ie
+    categories:
+      - Brand Icons
+
+  - name:       Credit Card
+    id:         credit-card-alt
+    unicode:    f283
+    created:    4.5
+    filter:
+      - money
+      - buy
+      - debit
+      - checkout
+      - purchase
+      - payment
+      - credit card
+    categories:
+      - Payment Icons
+      - Web Application Icons
+
+  - name:       Codie Pie
+    id:         codiepie
+    unicode:    f284
+    created:    4.5
+    url:        codiepie.com
+    categories:
+      - Brand Icons
+
+  - name:       MODX
+    id:         modx
+    unicode:    f285
+    created:    4.5
+    categories:
+      - Brand Icons
+
+  - name:       Fort Awesome
+    id:         fort-awesome
+    unicode:    f286
+    created:    4.5
+    url:        fortawesome.com
+    categories:
+      - Brand Icons
+
+  - name:       USB
+    id:         usb
+    unicode:    f287
+    created:    4.5
+    categories:
+      - Brand Icons
+
+  - name:       Product Hunt
+    id:         product-hunt
+    unicode:    f288
+    created:    4.5
+    categories:
+      - Brand Icons
+
+  - name:       Mixcloud
+    id:         mixcloud
+    unicode:    f289
+    created:    4.5
+    categories:
+      - Brand Icons
+
+  - name:       Scribd
+    id:         scribd
+    unicode:    f28a
+    created:    4.5
+    categories:
+      - Brand Icons
+
+  - name:       Pause Circle
+    id:         pause-circle
+    unicode:    f28b
+    created:    4.5
+    categories:
+      - Video Player Icons
+
+  - name:       Pause Circle Outlined
+    id:         pause-circle-o
+    unicode:    f28c
+    created:    4.5
+    categories:
+      - Video Player Icons
+
+  - name:       Stop Circle
+    id:         stop-circle
+    unicode:    f28d
+    created:    4.5
+    categories:
+      - Video Player Icons
+
+  - name:       Stop Circle Outlined
+    id:         stop-circle-o
+    unicode:    f28e
+    created:    4.5
+    categories:
+      - Video Player Icons
+
+
+  - name:       Shopping Bag
+    id:         shopping-bag
+    unicode:    f290
+    created:    4.5
+    categories:
+      - Web Application Icons
+
+  - name:       Shopping Basket
+    id:         shopping-basket
+    unicode:    f291
+    created:    4.5
+    categories:
+      - Web Application Icons
+
+  - name:       Hashtag
+    id:         hashtag
+    unicode:    f292
+    created:    4.5
+    categories:
+      - Web Application Icons
+
+  - name:       Bluetooth
+    id:         bluetooth
+    unicode:    f293
+    created:    4.5
+    categories:
+      - Web Application Icons
+      - Brand Icons
+
+  - name:       Bluetooth
+    id:         bluetooth-b
+    unicode:    f294
+    created:    4.5
+    categories:
+      - Web Application Icons
+      - Brand Icons
+
+  - name:       Percent
+    id:         percent
+    unicode:    f295
+    created:    4.5
+    categories:
+      - Web Application Icons
+
+
+  - name:       GitLab
+    id:         gitlab
+    unicode:    f296
+    created:    4.6
+    url:        gitlab.com
+    categories:
+      - Brand Icons
+
+  - name:       WPBeginner
+    id:         wpbeginner
+    unicode:    f297
+    created:    4.6
+    url:        wpbeginner.com
+    categories:
+      - Brand Icons
+
+  - name:       WPForms
+    id:         wpforms
+    unicode:    f298
+    created:    4.6
+    url:        wpforms.com
+    categories:
+      - Brand Icons
+
+  - name:       Envira Gallery
+    id:         envira
+    unicode:    f299
+    created:    4.6
+    url:        enviragallery.com
+    filter:
+      - leaf
+    categories:
+      - Brand Icons
+
+  - name:       Universal Access
+    id:         universal-access
+    unicode:    f29a
+    created:    4.6
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       Wheelchair Alt
+    id:         wheelchair-alt
+    unicode:    f29b
+    created:    4.6
+    filter:
+      - handicap
+      - person
+    categories:
+      - Web Application Icons
+      - Medical Icons
+      - Transportation Icons
+      - Accessibility Icons
+
+  - name:       Question Circle Outlined
+    id:         question-circle-o
+    unicode:    f29c
+    created:    4.6
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       Blind
+    id:         blind
+    unicode:    f29d
+    created:    4.6
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       Audio Description
+    id:         audio-description
+    unicode:    f29e
+    created:    4.6
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+
+  - name:       Volume Control Phone
+    id:         volume-control-phone
+    unicode:    f2a0
+    created:    4.6
+    filter:
+      - telephone
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       Braille
+    id:         braille
+    unicode:    f2a1
+    created:    4.6
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       Assistive Listening Systems
+    id:         assistive-listening-systems
+    unicode:    f2a2
+    created:    4.6
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       American Sign Language Interpreting
+    id:         american-sign-language-interpreting
+    unicode:    f2a3
+    created:    4.6
+    aliases:
+      - asl-interpreting
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       Deaf
+    id:         deaf
+    unicode:    f2a4
+    created:    4.6
+    aliases:
+      - deafness
+      - hard-of-hearing
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       Glide
+    id:         glide
+    unicode:    f2a5
+    created:    4.6
+    categories:
+      - Brand Icons
+
+  - name:       Glide G
+    id:         glide-g
+    unicode:    f2a6
+    created:    4.6
+    categories:
+      - Brand Icons
+
+  - name:       Sign Language
+    id:         sign-language
+    unicode:    f2a7
+    created:    4.6
+    aliases:
+      - signing
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+
+  - name:       Low Vision
+    id:         low-vision
+    unicode:    f2a8
+    created:    4.6
+    categories:
+      - Web Application Icons
+      - Accessibility Icons
+
+  - name:       Viadeo
+    id:         viadeo
+    unicode:    f2a9
+    created:    4.6
+    categories:
+      - Brand Icons
+
+  - name:       Viadeo Square
+    id:         viadeo-square
+    unicode:    f2aa
+    created:    4.6
+    categories:
+      - Brand Icons
+
+  - name:       Snapchat
+    id:         snapchat
+    unicode:    f2ab
+    created:    4.6
+    categories:
+      - Brand Icons
+
+  - name:       Snapchat Ghost
+    id:         snapchat-ghost
+    unicode:    f2ac
+    created:    4.6
+    categories:
+      - Brand Icons
+
+  - name:       Snapchat Square
+    id:         snapchat-square
+    unicode:    f2ad
+    created:    4.6
+    categories:
+      - Brand Icons
+
+  - name:       Pied Piper Logo
+    id:         pied-piper
+    unicode:    f2ae
+    created:    4.6
+    categories:
+      - Brand Icons
+
+
+  - name:       First Order
+    id:         first-order
+    unicode:    f2b0
+    created:    4.6
+    categories:
+      - Brand Icons
+
+  - name:       Yoast
+    id:         yoast
+    unicode:    f2b1
+    created:    4.6
+    url:        yoast.com
+    categories:
+      - Brand Icons
+
+  - name:       ThemeIsle
+    id:         themeisle
+    unicode:    f2b2
+    created:    4.6
+    url:        themeisle.com
+    categories:
+      - Brand Icons
+
+  - name:       Google Plus Official
+    id:         google-plus-official
+    unicode:    f2b3
+    created:    4.6
+    aliases:
+      - google-plus-circle
+    categories:
+      - Brand Icons
+
+  - name:       Font Awesome
+    id:         font-awesome
+    unicode:    f2b4
+    created:    4.6
+    aliases:
+      - fa
+    categories:
+      - Brand Icons
+
+  - name:       Handshake Outlined
+    id:         handshake-o
+    unicode:    f2b5
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Envelope Open
+    id:         envelope-open
+    unicode:    f2b6
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Envelope Open Outlined
+    id:         envelope-open-o
+    unicode:    f2b7
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Linode
+    id:         linode
+    unicode:    f2b8
+    created:    4.7
+    url:        linode.com
+    categories:
+      - Brand Icons
+
+  - name:       Address Book
+    id:         address-book
+    unicode:    f2b9
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Address Book Outlined
+    id:         address-book-o
+    unicode:    f2ba
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Address Card
+    id:         address-card
+    unicode:    f2bb
+    created:    4.7
+    aliases:
+      - vcard
+    categories:
+      - Web Application Icons
+
+  - name:       Address Card Outlined
+    id:         address-card-o
+    unicode:    f2bc
+    created:    4.7
+    aliases:
+      - vcard-o
+    categories:
+      - Web Application Icons
+
+  - name:       User Circle
+    id:         user-circle
+    unicode:    f2bd
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       User Circle Outlined
+    id:         user-circle-o
+    unicode:    f2be
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+
+  - name:       User Outlined
+    id:         user-o
+    unicode:    f2c0
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Identification Badge
+    id:         id-badge
+    unicode:    f2c1
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Identification Card
+    id:         id-card
+    unicode:    f2c2
+    created:    4.7
+    aliases:
+      - drivers-license
+    categories:
+      - Web Application Icons
+
+  - name:       Identification Card Outlined
+    id:         id-card-o
+    unicode:    f2c3
+    created:    4.7
+    aliases:
+      - drivers-license-o
+    categories:
+      - Web Application Icons
+
+  - name:       Quora
+    id:         quora
+    unicode:    f2c4
+    created:    4.7
+    categories:
+      - Brand Icons
+
+  - name:       Free Code Camp
+    id:         free-code-camp
+    unicode:    f2c5
+    created:    4.7
+    categories:
+      - Brand Icons
+
+  - name:       Telegram
+    id:         telegram
+    unicode:    f2c6
+    created:    4.7
+    categories:
+      - Brand Icons
+
+  - name:       Thermometer Full
+    id:         thermometer-full
+    unicode:    f2c7
+    created:    4.7
+    aliases:
+      - thermometer-4
+      - thermometer
+    categories:
+      - Web Application Icons
+
+  - name:       Thermometer 3/4 Full
+    id:         thermometer-three-quarters
+    unicode:    f2c8
+    created:    4.7
+    aliases:
+      - thermometer-3
+    categories:
+      - Web Application Icons
+
+  - name:       Thermometer 1/2 Full
+    id:         thermometer-half
+    unicode:    f2c9
+    created:    4.7
+    aliases:
+      - thermometer-2
+    categories:
+      - Web Application Icons
+
+  - name:       Thermometer 1/4 Full
+    id:         thermometer-quarter
+    unicode:    f2ca
+    created:    4.7
+    aliases:
+      - thermometer-1
+    categories:
+      - Web Application Icons
+
+  - name:       Thermometer Empty
+    id:         thermometer-empty
+    unicode:    f2cb
+    created:    4.7
+    aliases:
+      - thermometer-0
+    categories:
+      - Web Application Icons
+
+  - name:       Shower
+    id:         shower
+    unicode:    f2cc
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Bath
+    id:         bath
+    unicode:    f2cd
+    created:    4.7
+    aliases:
+      - bathtub
+      - s15
+    categories:
+      - Web Application Icons
+
+  - name:       Podcast
+    id:         podcast
+    unicode:    f2ce
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+
+  - name:       Window Maximize
+    id:         window-maximize
+    unicode:    f2d0
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Window Minimize
+    id:         window-minimize
+    unicode:    f2d1
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Window Restore
+    id:         window-restore
+    unicode:    f2d2
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Window Close
+    id:         window-close
+    unicode:    f2d3
+    created:    4.7
+    aliases:
+      - times-rectangle
+    categories:
+      - Web Application Icons
+
+  - name:       Window Close Outline
+    id:         window-close-o
+    unicode:    f2d4
+    created:    4.7
+    aliases:
+      - times-rectangle-o
+    categories:
+      - Web Application Icons
+
+  - name:       Bandcamp
+    id:         bandcamp
+    unicode:    f2d5
+    created:    4.7
+    categories:
+      - Brand Icons
+
+  - name:       Grav
+    id:         grav
+    unicode:    f2d6
+    created:    4.7
+    categories:
+      - Brand Icons
+
+  - name:       Etsy
+    id:         etsy
+    unicode:    f2d7
+    created:    4.7
+    categories:
+      - Brand Icons
+
+  - name:       IMDB
+    id:         imdb
+    unicode:    f2d8
+    created:    4.7
+    categories:
+      - Brand Icons
+
+  - name:       Ravelry
+    id:         ravelry
+    unicode:    f2d9
+    created:    4.7
+    categories:
+      - Brand Icons
+
+  - name:       Eercast
+    id:         eercast
+    unicode:    f2da
+    created:    4.7
+    url:        eercast.com
+    categories:
+      - Brand Icons
+
+  - name:       Microchip
+    id:         microchip
+    unicode:    f2db
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Snowflake Outlined
+    id:         snowflake-o
+    unicode:    f2dc
+    created:    4.7
+    categories:
+      - Web Application Icons
+
+  - name:       Superpowers
+    id:         superpowers
+    unicode:    f2dd
+    created:    4.7
+    url:        superpowers.io
+    categories:
+      - Brand Icons
+
+  - name:       WPExplorer
+    id:         wpexplorer
+    unicode:    f2de
+    created:    4.7
+    url:        wpexplorer.com
+    categories:
+      - Brand Icons
+
+
+  - name:       Meetup
+    id:         meetup
+    unicode:    f2e0
+    created:    4.7
     categories:
       - Brand Icons

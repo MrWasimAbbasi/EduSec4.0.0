@@ -19,8 +19,9 @@ class PDO extends \PDO
     /**
      * Returns value of the last inserted ID.
      * @param string|null $sequence the sequence name. Defaults to null.
-     * @return integer last inserted ID value.
+     * @return int last inserted ID value.
      */
+    #[\ReturnTypeWillChange]
     public function lastInsertId($sequence = null)
     {
         return $this->query('SELECT CAST(COALESCE(SCOPE_IDENTITY(), @@IDENTITY) AS bigint)')->fetchColumn();
@@ -29,8 +30,9 @@ class PDO extends \PDO
     /**
      * Starts a transaction. It is necessary to override PDO's method as MSSQL PDO driver does not
      * natively support transactions.
-     * @return boolean the result of a transaction start.
+     * @return bool the result of a transaction start.
      */
+    #[\ReturnTypeWillChange]
     public function beginTransaction()
     {
         $this->exec('BEGIN TRANSACTION');
@@ -41,8 +43,9 @@ class PDO extends \PDO
     /**
      * Commits a transaction. It is necessary to override PDO's method as MSSQL PDO driver does not
      * natively support transactions.
-     * @return boolean the result of a transaction commit.
+     * @return bool the result of a transaction commit.
      */
+    #[\ReturnTypeWillChange]
     public function commit()
     {
         $this->exec('COMMIT TRANSACTION');
@@ -53,8 +56,9 @@ class PDO extends \PDO
     /**
      * Rollbacks a transaction. It is necessary to override PDO's method as MSSQL PDO driver does not
      * natively support transactions.
-     * @return boolean the result of a transaction roll back.
+     * @return bool the result of a transaction roll back.
      */
+    #[\ReturnTypeWillChange]
     public function rollBack()
     {
         $this->exec('ROLLBACK TRANSACTION');
@@ -64,19 +68,21 @@ class PDO extends \PDO
 
     /**
      * Retrieve a database connection attribute.
+     *
      * It is necessary to override PDO's method as some MSSQL PDO driver (e.g. dblib) does not
-     * support getting attributes
-     * @param integer $attribute One of the PDO::ATTR_* constants.
+     * support getting attributes.
+     * @param int $attribute One of the PDO::ATTR_* constants.
      * @return mixed A successful call returns the value of the requested PDO attribute.
      * An unsuccessful call returns null.
      */
+    #[\ReturnTypeWillChange]
     public function getAttribute($attribute)
     {
         try {
             return parent::getAttribute($attribute);
         } catch (\PDOException $e) {
             switch ($attribute) {
-                case PDO::ATTR_SERVER_VERSION:
+                case self::ATTR_SERVER_VERSION:
                     return $this->query("SELECT CAST(SERVERPROPERTY('productversion') AS VARCHAR)")->fetchColumn();
                 default:
                     throw $e;

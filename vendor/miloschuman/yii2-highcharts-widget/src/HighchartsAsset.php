@@ -5,8 +5,7 @@
  *
  * @author Milo Schuman <miloschuman@gmail.com>
  * @link https://github.com/miloschuman/yii2-highcharts/
- * @license http://www.opensource.org/licenses/mit-license.php MIT License
- * @version 4.0.4
+ * @license https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace miloschuman\highcharts;
@@ -14,12 +13,11 @@ namespace miloschuman\highcharts;
 use yii\web\AssetBundle;
 
 /**
- * Asset bundle for Highcharts and Highstock widget.
+ * Asset bundle for Highcharts, Highstock, and Highmaps widgets.
  */
 class HighchartsAsset extends AssetBundle
 {
-
-    public $sourcePath = '@vendor/miloschuman/yii2-highcharts-widget/src/assets';
+    public $sourcePath = '@bower/highcharts';
     public $depends = ['yii\web\JqueryAsset'];
 
     /**
@@ -38,14 +36,8 @@ class HighchartsAsset extends AssetBundle
             $this->js[] = "$script.$ext";
         }
 
-        // make sure that either highcharts or highstock base file is included.
+        // make sure the highcharts base file is included first
         array_unshift($this->js, "highcharts.$ext");
-        $hasHighstock = in_array("highstock.$ext", $this->js);
-        if ($hasHighstock) {
-            array_unshift($this->js, "highstock.$ext");
-            // remove highcharts if highstock is used on page
-            $this->js = array_diff($this->js, ["highcharts.$ext"]);
-        }
 
         return $this;
     }

@@ -1,62 +1,71 @@
 <?php
 
+use mdm\admin\AnimateAsset;
 use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\web\YiiAsset;
 
-/**
- * @var yii\web\View $this
- */
+/* @var $this yii\web\View */
+/* @var $routes [] */
+
 $this->title = Yii::t('rbac-admin', 'Routes');
 $this->params['breadcrumbs'][] = $this->title;
+
+AnimateAsset::register($this);
+YiiAsset::register($this);
+$opts = Json::htmlEncode([
+    'routes' => $routes,
+]);
+$this->registerJs("var _opts = {$opts};");
+$this->registerJs($this->render('_script.js'));
+$animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>';
 ?>
-<div class="col-xs-12">
-  <div class="col-lg-4 col-sm-4 col-xs-8 no-padding"><h3 class="box-title"><i class="fa fa-search"></i> <?= Html::encode($this->title) ?></h3></div>
-  <div class="col-lg-1 col-sm-2 col-xs-4 pull-right no-padding" style="padding-top: 20px !important;">
-	<?= Html::a(Yii::t('rbac-admin', 'ADD'), ['create'], ['class' => 'btn btn-block btn-success']) ?>
-   </div>
-</div>
-
-<div class="col-xs-12">
- <div class="box box-primary view-item">
-   <div class="routes-form-list row" style="padding-bottom:10px">
-
-   <div class="col-xs-12 col-lg-12">
-    <div class="col-lg-5 col-sm-12 col-xs-12">
-        <?= Yii::t('rbac-admin', '<b>Avaliable</b>') ?>:
-        <?php
-        echo "<div class='input-group form-group col-lg-10 col-xs-8 pull-right no-padding'>".Html::textInput('search_av', '', ['class' => 'role-search form-control', 'data-target' => 'new']);
-        echo Html::a('<span class="glyphicon glyphicon-refresh"></span>', '', ['id'=>'btn-refresh', 'title' => 'Refresh', 'class' => 'input-group-addon']). "</div>";
-        echo '<br>';
-        echo Html::listBox('routes', '', $new, [
-            'id' => 'new',
-            'multiple' => true,
-            'size' => 15,
-            'style' => 'width:100%;padding:5px']);
-        ?>
+<h1><?=Html::encode($this->title);?></h1>
+<div class="row">
+    <div class="col-sm-11">
+        <div class="input-group">
+            <input id="inp-route" type="text" class="form-control"
+                   placeholder="<?=Yii::t('rbac-admin', 'New route(s)');?>">
+            <span class="input-group-btn">
+                <?=Html::a(Yii::t('rbac-admin', 'Add') . $animateIcon, ['create'], [
+    'class' => 'btn btn-success',
+    'id' => 'btn-new',
+]);?>
+            </span>
+        </div>
     </div>
-    <div class="col-lg-2 col-sm-12 col-xs-12 text-center">
+</div>
+<p>&nbsp;</p>
+<div class="row">
+    <div class="col-sm-5">
+        <div class="input-group">
+            <input class="form-control search" data-target="available"
+                   placeholder="<?=Yii::t('rbac-admin', 'Search for available');?>">
+            <span class="input-group-btn">
+                <?=Html::a('<span class="glyphicon glyphicon-refresh"></span>', ['refresh'], [
+    'class' => 'btn btn-default',
+    'id' => 'btn-refresh',
+]);?>
+            </span>
+        </div>
+        <select multiple size="20" class="form-control list" data-target="available"></select>
+    </div>
+    <div class="col-sm-1">
         <br><br>
-        <?php
-        echo Html::a('>>', '#', ['class' => 'btn btn-success', 'data-action' => 'assign', 'title' => 'Assign']) . '<br><br>';
-        echo Html::a('<<', '#', ['class' => 'btn btn-danger', 'data-action' => 'delete', 'title' => 'Delete']) . '<br>';
-        ?>
-	<br><br>
+        <?=Html::a('&gt;&gt;' . $animateIcon, ['assign'], [
+    'class' => 'btn btn-success btn-assign',
+    'data-target' => 'available',
+    'title' => Yii::t('rbac-admin', 'Assign'),
+]);?><br><br>
+        <?=Html::a('&lt;&lt;' . $animateIcon, ['remove'], [
+    'class' => 'btn btn-danger btn-assign',
+    'data-target' => 'assigned',
+    'title' => Yii::t('rbac-admin', 'Remove'),
+]);?>
     </div>
-    <div class="col-lg-5 col-sm-12 col-xs-12">
-        <?= Yii::t('rbac-admin', '<b>Assigned</b>') ?>:
-        <?php
-        echo "<div class='form-group col-lg-10 col-xs-8 pull-right no-padding'>".Html::textInput('search_asgn', '', ['class' => 'role-search form-control', 'data-target' => 'exists']) . '</div>';
-        echo Html::listBox('routes', '', $exists, [
-            'id' => 'exists',
-            'multiple' => true,
-            'size' => 15,
-            'style' => 'width:100%;padding:5px',
-            'options' => $existsOptions]);
-        ?>
+    <div class="col-sm-5">
+        <input class="form-control search" data-target="assigned"
+               placeholder="<?=Yii::t('rbac-admin', 'Search for assigned');?>">
+        <select multiple size="20" class="form-control list" data-target="assigned"></select>
     </div>
-   </div>
-
-  </div>
- </div>
 </div>
-<?php
-$this->render('_script');

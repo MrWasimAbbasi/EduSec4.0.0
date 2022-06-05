@@ -10,6 +10,7 @@ namespace pheme\grid\actions;
 use Yii;
 use yii\base\Action;
 use yii\base\InvalidConfigException;
+use yii\db\Expression;
 use yii\web\MethodNotAllowedHttpException;
 
 /**
@@ -28,19 +29,24 @@ class ToggleAction extends Action
     public $attribute = 'active';
 
     /**
+     * @var string scenario model
+     */
+    public $scenario = null;
+
+    /**
      * @var string|array additional condition for loading the model
      */
     public $andWhere;
 
     /**
-     * @var string|int|boolean what to set active models to
+     * @var string|int|boolean|Expression what to set active models to
      */
-    public $onValue = 0;                  // replace 1 to 0 Date :4-May-2015
+    public $onValue = 1;
 
     /**
      * @var string|int|boolean what to set inactive models to
      */
-    public $offValue = 1;		// replace 0 to 1 Date :4-May-2015
+    public $offValue = 0;
 
     /**
      * @var bool whether to set flash messages or not
@@ -62,7 +68,11 @@ class ToggleAction extends Action
      */
     public $redirect;
 
-    public $type = NULL;
+    /**
+     * @var string pk field name
+     */
+    public $primaryKey = 'id';
+
     /**
      * Run the action
      * @param $id integer id of model to be loaded
@@ -76,34 +86,17 @@ class ToggleAction extends Action
         if (!Yii::$app->request->getIsPost()) {
             throw new MethodNotAllowedHttpException();
         }
-        $id = (int)$id;
         $result = null;
 
-        if (empty($this->modelClass) || !class_exists($this->modelClass)) { 
+        if (empty($this->modelClass) || !class_exists($this->modelClass)) {
             throw new InvalidConfigException("Model class doesn't exist");
         }
         /* @var $modelClass \yii\db\ActiveRecord */
         $modelClass = $this->modelClass;
+
+
         $attribute = $this->attribute;
-
-	/* @Edited By AmitG */
-	if($modelClass == 'app\modules\dashboard\models\Notice')
-		$model = $modelClass::find()->where(['notice_id' => $id]);
-
-	if($modelClass == 'app\modules\dashboard\models\MsgOfDay')
-        	$model = $modelClass::find()->where(['msg_of_day_id' => $id]);
-
-	if($modelClass == 'app\modules\fees\models\FeesCollectCategory')
-        	$model = $modelClass::find()->where(['fees_collect_category_id' => $id]);
-
-	if($modelClass == 'app\modules\course\models\Courses')
-        	$model = $modelClass::find()->where(['course_id' => $id]);
-
-	if($modelClass == 'app\modules\course\models\Batches')
-        	$model = $modelClass::find()->where(['batch_id' => $id]);
-
-	if($modelClass == 'app\modules\course\models\Section')
-        	$model = $modelClass::find()->where(['section_id' => $id]);
+        $model = $modelClass::find()->where([$this->primaryKey => $id]);
 
         if (!empty($this->andWhere)) {
             $model->andWhere($this->andWhere);
@@ -111,22 +104,22 @@ class ToggleAction extends Action
 
         $model = $model->one();
 
+        if (!is_null($this->scenario)) {
+            $model->scenario = $this->scenario;
+        }
+
         if (!$model->hasAttribute($this->attribute)) {
             throw new InvalidConfigException("Attribute doesn't exist");
         }
 
         if ($model->$attribute == $this->onValue) {
             $model->$attribute = $this->offValue;
+        } elseif ($this->onValue instanceof Expression && $model->$attribute != $this->offValue) {
+            $model->$attribute = $this->offValue;
         } else {
             $model->$attribute = $this->onValue;
         }
 
-	/* @Edited By AmitG */
-	if($this->type === 'toggle-status') {
-		$model->updateAll([$attribute => 1], 'is_status = 0');
-		//replace $attribute=0 to 1 & is_status=1 to 0 Date:4-May-2015
-	}
-	
         if ($model->save()) {
             if ($this->setFlash) {
                 Yii::$app->session->setFlash('success', $this->flashSuccess);
