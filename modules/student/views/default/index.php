@@ -19,13 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="box-body">
 <?php
 	if($stuCount) {
+
 		echo Highcharts::widget([
 			'scripts' => [
-				'highcharts-3d',   
+				'highcharts-3d',
 			],
-			'options' => [	
+			'options' => [
 				'exporting'=>[
-				 	'enabled'=>false 
+				 	'enabled'=>false
 				],
 				'legend'=>[
 				    'align'=>'center',
@@ -56,8 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
 							'enabled'=>false
 					    	 ],
 						'showInLegend'=>true,
-					],	
-				
+					],
+
 				],
 				'series'=> [
 					[
