@@ -38,19 +38,20 @@
  */
 
 namespace app\components;
+use Mpdf\Mpdf;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use app\models\Organization;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
-use mPDF;
+//use mPDF;
  
 class ExportToPdf extends Component
 {
 	public function exportData($title='',$filename='Edusec Pdf',$html=NULL)
 	{
-		$mpdf = new mPDF('utf-8', 'A4',0,'',15,15,25,16,4,9,'P');
+		$mpdf = new mPDF(['utf-8', 'A4',0,'',15,15,25,16,4,9,'P']);
 		$org = Organization::find()->asArray()->one();
 		$src = Yii::$app->urlManager->createAbsoluteUrl('site/loadimage');
 		$org_image=Html::img($src,['alt'=>'No Image','width'=>90, 'height'=>70]); 
@@ -90,7 +91,7 @@ class ExportToPdf extends Component
 		  'even' => []
 		];
 		$mpdf->SetFooter($arr);
-		$mpdf->WriteHTML('<sethtmlpageheader name="main" page="ALL" value="on" show-this-page="1">');
+//		$mpdf->WriteHTML('<sethtmlpageheader name="main" page="ALL" value="on" show-this-page="1">');
 		$mpdf->WriteHTML($html);
 		$mpdf->Output($filename.'.pdf',"I");
 

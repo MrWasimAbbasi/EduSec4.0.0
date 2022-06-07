@@ -37,6 +37,7 @@
  */
 
 namespace app\modules\fees\controllers;
+use Mpdf\Mpdf;
 use Yii;
 use app\modules\fees\models\FeesPaymentTransaction;
 use app\modules\fees\models\FeesPaymentTransactionSearch;
@@ -45,7 +46,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use yii\widgets\ActiveForm;
-use mPDF;
+//use mPDF;
 
 class FeesPaymentTransactionController extends Controller
 {
@@ -195,7 +196,7 @@ class FeesPaymentTransactionController extends Controller
 				]);
 				
 		$imgSrc = Yii::$app->urlManager->createAbsoluteUrl('site/loadimage');
-		$mpdf = new mPDF('utf-8', 'A4',0,'',15,15,25,16,4,9,'P');
+		$mpdf = new mPDF(['utf-8', 'A4',0,'',15,15,25,16,4,9,'P']);
 		$mpdf->WriteHTML('<watermarkimage src='.$imgSrc.' alpha="0.33" size="50,30"/>');
 		$mpdf->showWatermarkImage = true;
 		$mpdf->WriteHTML($html);
